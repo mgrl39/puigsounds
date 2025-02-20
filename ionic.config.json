@@ -1,0 +1,7 @@
+{
+  "name": "puigsounds",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
