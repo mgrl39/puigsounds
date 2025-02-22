@@ -17,10 +17,13 @@
       <div id="container">
         <strong>Ready to create an app?</strong>
         <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <CustomInput />
+        <!-- 
         <Tag texto="SMX" />
       <Tag texto="DAW" />
       <Tag texto="DAM" />
       <Tag texto="ASIX" />
+      -->
       </div>
     </ion-content>
   </ion-page>
