@@ -13,9 +13,14 @@
         </ion-toolbar>
       </ion-header>
 
+      <HeartInput />
       <div id="container">
         <strong>Ready to create an app?</strong>
         <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <Tag texto="SMX" />
+      <Tag texto="DAW" />
+      <Tag texto="DAM" />
+      <Tag texto="ASIX" />
       </div>
     </ion-content>
   </ion-page>
@@ -23,6 +28,7 @@
 
 <script setup lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import HeartInput from './components/Clickable/HeartInput.vue';
 </script>
 
 <style scoped>
@@ -53,4 +59,5 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue
 #container a {
   text-decoration: none;
 }
+
 </style>
