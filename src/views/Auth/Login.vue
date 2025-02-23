@@ -1,10 +1,9 @@
 <template>
   <ion-page>
     <ion-content class="ion-padding">
-      <img src="../../../assets/images/login-imgs/background/green.png" alt="Background" class="background-img mobile-only mobile-background"/>
-
       <!-- Versión móvil -->
       <div class="login-container mobile-only">
+        <img src="../../../assets/images/login-imgs/background/green.png" alt="Background" class="background-img" />
         <div class="logo-container">
           <img src="../../../favicon.png" alt="Logo" class="logo"/>
         </div>
@@ -24,8 +23,11 @@
       </div>
 
       <!-- Versión desktop -->
-      <div class="login-container desktop-only" style="background-image: url('../../../assets/images/login-imgs/background/green.png'); background-size: cover; background-position: center;">
+      <div class="login-container desktop-only">
+        <BackgroundLayer class="background-layer" />
+        <LoginCard />
         <div class="login-right">
+          
           <div class="logo-container">
             <img src="../../assets/favicon.png" alt="Logo" class="logo"/>
           </div>
@@ -56,6 +58,8 @@ import { IonPage, IonContent, IonButton, IonText } from '@ionic/vue';
 import PasswordInput from '@/views/components/Inputs/PasswordInput.vue';
 import Submit from '@/views/components/Inputs/Submit.vue';
 import PuigSounds from '@/views/components/ui/PuigSounds.vue';
+import BackgroundLayer from '@/views/components/Background/BackgroundLayer.vue';
+import LoginCard from '@/views/components/ui/LoginCard.vue';
 const email = ref('');
 const password = ref('');
 
@@ -65,7 +69,19 @@ const login = () => {
 </script>
 
 <style scoped>
+.background-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.85;
+  z-index: 0;
+}
+
 .login-container {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,13 +89,64 @@ const login = () => {
   height: 100%;
 }
 
+/* Estilos para móvil */
+.mobile-only {
+  display: none;
+  position: relative;
+}
+
+/* Estilos para desktop */
+.desktop-only {
+  position: relative;
+  display: none;
+}
+
+/* Media queries para controlar la visualización */
+@media (max-width: 768px) {
+  .mobile-only {
+    display: flex;
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none;
+  }
+  
+  .desktop-only {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+
+  .login-right {
+    flex: 1;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+}
+
 .background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
+  z-index: 0;
 }
 
 .logo-container {
+  position: relative;
+  z-index: 1;
   margin: 20px 0;
 }
 
@@ -99,4 +166,11 @@ const login = () => {
   background-size: cover;
   background-position: center;
 }
+
+/* Asegurar que todo el contenido esté por encima del fondo */
+.mobile-only > * {
+  position: relative;
+  z-index: 1;
+}
+
 </style>
