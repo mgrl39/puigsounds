@@ -10,6 +10,7 @@
           <div class="musical-genres">
             <h3>Musical Genres</h3>
             <!-- Aquí irían las barras de géneros musicales -->
+            <MusicStats />
           </div>
         </div>
       </div>
@@ -19,6 +20,7 @@
 
 <script setup>
 import BaseLayout from '@/components/BaseLayout.vue';
+import MusicStats from '../components/ui/MusicStats.vue';
 </script>
 
 <style scoped>
