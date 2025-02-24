@@ -19,6 +19,6 @@
   width: 159px;
   height: 91px;
   flex-shrink: 0;
-  background: url('../../assets/images/logos/puig-logo.png') 50% / cover no-repeat;
+  background: url('../../assets/images/logos/puig-logo2.png') 50% / cover no-repeat;
 }
 </style>

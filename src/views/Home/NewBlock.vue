@@ -38,9 +38,10 @@
               </div>
             </div>
           </div>
-          
+
           <!-- Banner en la parte inferior -->
           <ChampionsBanner class="bottom-banner" />
+
         </div>
       </ContentArea>
     </div>

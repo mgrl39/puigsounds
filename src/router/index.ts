@@ -4,12 +4,12 @@ import HomePage from '../views/HomePage.vue'
 import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import PasswordReset from '../views/Auth/PasswordReset.vue'
-import Home from '../views/Home/Home.vue'
-import Vote from '../views/Home/Vote.vue'
-import Stats from '../views/Home/Stats.vue'
-import Profile from '../views/Home/Profile.vue'
-import NotFound from '../views/Auth/NotFound.vue'
-  import NewBlock from '../views/Home/NewBlock.vue'
+import NotFound from '../views/NotFound.vue'
+import NewBlock from '../views/Home/NewBlock.vue'
+import ProfilePage from '../views/Home/ProfilePage.vue'
+import VotePage from '../views/Home/VotePage.vue'
+import StatsPage from '../views/Home/StatsPage.vue'
+
 const routes: Array<RouteRecordRaw> = [
   /*
   {
@@ -26,13 +26,12 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/login', component: Login },
   { path: '/register', component: Register },
   { path: '/password-reset', component: PasswordReset },
-  { path: '/home', component: Home },
-  { path: '/vote', component: Vote },
-  { path: '/stats', component: Stats },
-  // ahora hay que meter el 404
-  { path: '/:pathMatch(.*)*', component: NotFound },
-  { path: '/profile', component: Profile },
+  { path: '/home', component: HomePage },
+  { path: '/vote', component: VotePage },
+  { path: '/stats', component: StatsPage },
+  { path: '/profile', component: ProfilePage },
   { path: '/new-block', component: NewBlock },
+  { path: '/:pathMatch(.*)*', component: NotFound }
 ]
 
 const router = createRouter({
