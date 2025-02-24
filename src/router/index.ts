@@ -9,7 +9,7 @@ import Vote from '../views/Home/Vote.vue'
 import Stats from '../views/Home/Stats.vue'
 import Profile from '../views/Home/Profile.vue'
 import NotFound from '../views/Auth/NotFound.vue'
-
+  import NewBlock from '../views/Home/NewBlock.vue'
 const routes: Array<RouteRecordRaw> = [
   /*
   {
@@ -32,6 +32,7 @@ const routes: Array<RouteRecordRaw> = [
   // ahora hay que meter el 404
   { path: '/:pathMatch(.*)*', component: NotFound },
   { path: '/profile', component: Profile },
+  { path: '/new-block', component: NewBlock },
 ]
 
 const router = createRouter({
