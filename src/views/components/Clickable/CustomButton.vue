@@ -7,7 +7,7 @@
     @mouseup="isActive = false"
     :class="{ hover: isHovered, active: isActive }"
   >
-    {{ buttonText }}
+    {{ text }}
   </button>
 </template>
 
@@ -15,14 +15,27 @@
 import { ref } from 'vue';
 
 const props = defineProps({
-  buttonText: {
+  text: {
     type: String,
     default: 'BUTTON TEXT'
   }
 });
 
+// Emitir eventos para permitir cambiar el texto desde el componente padre
+const emit = defineEmits(['update:text']);
+
+// Método para cambiar el texto del botón
+const cambiarTexto = (nuevoTexto) => {
+  emit('update:text', nuevoTexto);
+};
+
 const isHovered = ref(false);
 const isActive = ref(false);
+
+// Exponer el método para que pueda ser utilizado por el componente padre
+defineExpose({
+  cambiarTexto
+});
 </script>
 
 <style scoped>
@@ -45,8 +58,6 @@ const isActive = ref(false);
   font-family: 'Montserrat', sans-serif;
   font-size: 22px;
   font-weight: 700;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: #B8B8B8;
 }
 
 .custom-button:hover {
