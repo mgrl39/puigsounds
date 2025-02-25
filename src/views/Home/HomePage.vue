@@ -31,7 +31,7 @@
 <script setup>
 import { IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
 import { ref } from 'vue';
-import BaseLayout from '@/components/BaseLayout.vue';
+import BaseLayout from '../components/layout/BaseLayout.vue';
 import MusicStats from '../components/ui/MusicStats.vue';
 
 const rankedUsers = ref([
