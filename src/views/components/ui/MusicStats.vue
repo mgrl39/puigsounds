@@ -93,7 +93,7 @@ onMounted(() => {
   width: 389.812px;
   height: 315.924px;
   border-radius: 25px;
-  background: rgba(165, 52, 79, 0.03);
+  background: #5b1c2c;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -138,7 +138,7 @@ onMounted(() => {
 }
 
 .animated-bar {
-  fill: #6D0000;
+  fill: #7a2c2e;
   fill-opacity: 0.8;
   transition: all 1.5s ease-in-out;
   transform-origin: bottom;
