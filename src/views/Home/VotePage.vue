@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import BaseLayout from '@/components/BaseLayout.vue';
+import BaseLayout from '@/views/components/layout/BaseLayout.vue';
 </script>
 
 <style scoped>

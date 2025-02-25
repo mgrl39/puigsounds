@@ -51,10 +51,10 @@
 <script setup>
 import { IonPage, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
 import { ref } from 'vue';
-import SideMenu from '@/components/SideMenu.vue';
-import ContentArea from '@/components/ContentArea.vue';
-import CurrentSong from '@/components/CurrentSong.vue';
-import ChampionsBanner from '@/components/ChampionsBanner.vue';
+import SideMenu from '../components/layout/SideMenu.vue';
+import ContentArea from '../components/layout/ContentArea.vue';
+import CurrentSong from '../components/dashboard/CurrentSong.vue';
+import ChampionsBanner from '../components/Background/ChampionsBanner.vue';
 
 const activeIndex = ref(0);
 

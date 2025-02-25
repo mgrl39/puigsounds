@@ -21,8 +21,8 @@ import { IonPage } from '@ionic/vue';
 import { ref } from 'vue';
 import SideMenu from '@/views/components/layout/SideMenu.vue';
 import ContentArea from '@/views/components/layout/ContentArea.vue';
-import CurrentSong from '@/views/components/ui/CurrentSong.vue';
-import ChampionsBanner from '@/views/components/ui/ChampionsBanner.vue';
+import CurrentSong from '@/views/components/dashboard/CurrentSong.vue';
+import ChampionsBanner from '@/views/components/banners/ChampionsBanner.vue';
 
 const activeIndex = ref(0);
 </script>

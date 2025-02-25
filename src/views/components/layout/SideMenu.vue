@@ -35,7 +35,7 @@
 import { IonButton } from '@ionic/vue';
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
-import PuigLogo from './PuigLogo.vue';
+import PuigLogo from '@/views/components/common/PuigLogo.vue';
 
 const props = defineProps({
   activeIndex: {
