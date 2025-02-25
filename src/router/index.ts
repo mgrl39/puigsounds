@@ -27,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/logout', redirect: '/success-logout' },
   { path: '/success-logout', component: SuccessLogout },
   { path: '/register', component: Register },
-  { path: '/password-reset', component: PasswordReset },
+  { path: '/reset', component: PasswordReset },
   { path: '/home', component: HomePage },
   { path: '/vote', component: VotePage },
   { path: '/stats', component: StatsPage },
