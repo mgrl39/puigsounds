@@ -47,7 +47,9 @@ const computedIcon = computed(() => (props.type === 'password' ? lockIcon : eyeI
 <style scoped>
 .custom-input {
   display: flex;
-  width: 368px;
+  width: 100%;
+  max-width: 368px;
+  min-width: 280px;
   height: 54px;
   padding: 16px 0px 16px 20px;
   align-items: center;
@@ -69,7 +71,7 @@ const computedIcon = computed(() => (props.type === 'password' ? lockIcon : eyeI
   border: none;
   background: transparent;
   font-family: Montserrat, sans-serif;
-  font-size: 22px;
+  font-size: clamp(16px, 4vw, 22px);
   font-weight: 400;
   padding-left: 10px;
   color: #C0C0C2;
@@ -83,5 +85,22 @@ const computedIcon = computed(() => (props.type === 'password' ? lockIcon : eyeI
   height: 24px;
   flex-shrink: 0;
   opacity: 0.25;
+}
+
+@media screen and (max-width: 400px) {
+  .custom-input {
+    padding: 12px 0px 12px 15px;
+    height: 48px;
+  }
+  
+  .input-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .svg-icon {
+    width: 20px;
+    height: 20px;
+  }
 }
 </style>

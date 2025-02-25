@@ -10,11 +10,17 @@
                 <RankBox rank-type="GLOBAL" />
                 <RankBox rank-type="DAW" />
               </div>
-            </div>  
+
           </div>
+          
           <MusicStats />
+
         </div>
-        <CustomButton />
+        <div style="position: relative; background-color: green; width: auto; height: 50px; margin-left: auto;">
+                <CustomButton />
+              </div>  
+      </div>
+        
       </div>
     </template>
   </BaseLayout>

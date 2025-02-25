@@ -48,7 +48,8 @@ const login = () => {
 
 .custom-input {
   display: flex;
-  width: 353px;
+  width: 100%; /* Cambiado a 100% para ser más responsivo */
+  max-width: 353px; /* Mantiene el ancho máximo */
   height: 43px;
   padding: 16px 20px;
   border-radius: 15px;
