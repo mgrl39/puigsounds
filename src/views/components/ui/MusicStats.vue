@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-  <MusicPlayer /> 
+  <MusicPlayer @click="handleMusicPlay" /> 
 </template>
 
 <script setup>
@@ -53,6 +53,7 @@ const barWidth = ref(20.933);
 const barHeight = ref(183.857);
 const barHeights = ref([]);
 const calculatedYPositions = ref([]);
+const isPlaying = ref(false);
 
 const getRandomGenres = () => {
   const shuffled = [...allGenres].sort(() => 0.5 - Math.random());
@@ -70,6 +71,12 @@ const generateRandomHeights = () => {
   calculatedYPositions.value = barHeights.value.map(height => 
     barHeight.value - height
   );
+};
+
+const handleMusicPlay = () => {
+  isPlaying.value = !isPlaying.value;
+  // Aquí puedes agregar la lógica adicional para reproducir música
+  console.log('Estado de reproducción:', isPlaying.value);
 };
 
 onMounted(() => {

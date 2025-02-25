@@ -63,5 +63,4 @@ const rankedUsers = ref([
   margin-left: 20px;
 }
 
-// ... resto de estilos específicos del ranking
 </style> 
