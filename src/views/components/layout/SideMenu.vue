@@ -48,7 +48,7 @@ const emit = defineEmits(['update:activeIndex']);
 const router = useRouter();
 
 const menuItems = ref(['HOME', 'VOTING PAGE', 'MY PROFILE', 'TOP TIER', 'LOG OUT']);
-const routes = ['/', '/voting', '/profile', '/top-tier', '/logout'];
+const routes = ['/', '/vote', '/profile', '/top-tier', '/logout'];
 
 const navigateTo = (index) => {
   emit('update:activeIndex', index);
