@@ -23,6 +23,7 @@
           <MusicStats class="music-stats" />
         </div>
       </div>
+      <ChampionsBanner class="bottom-banner" />
     </template>
   </BaseLayout>
 </template>

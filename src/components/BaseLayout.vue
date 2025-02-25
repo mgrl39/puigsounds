@@ -7,21 +7,9 @@
           <!-- Contenido principal que será diferente en cada página -->
           <slot name="main-content"></slot>
           
-          <!-- Sección lateral derecha (común en todas las páginas) -->
-          <div class="right-section">
-            <CurrentSong />
-            <div class="student-counter">
-              <h2>STUDENTS</h2>
-              <div class="counter">1014</div>
-              <div class="next-bell">
-                Next Bell in:
-                <div class="timer">1:59:59</div>
-              </div>
-            </div>
-          </div>
+
 
           <!-- Banner inferior (común en todas las páginas) -->
-          <ChampionsBanner class="bottom-banner" />
         </div>
       </ContentArea>
     </div>

@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-  <MusicPlayer @click="handleMusicPlay" /> 
+ <!-- <MusicPlayer @click="handleMusicPlay" /> -->
 </template>
 
 <script setup>

@@ -21,6 +21,7 @@
 <script setup>
 import BaseLayout from '@/components/BaseLayout.vue';
 import MusicStats from '../components/ui/MusicStats.vue';
+import RankBox from '../../components/RankBox.vue';
 </script>
 
 <style scoped>
