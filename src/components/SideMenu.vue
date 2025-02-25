@@ -1,19 +1,32 @@
 <template>
   <div class="side-menu">
-    <PuigLogo />
-    <div class="menu">
+    <PuigLogo class="puig-logo" />
+    <div class="menu-items" style="margin-bottom: 40px;"> <!-- Aumentada la separación -->
       <ion-button 
         v-for="(item, index) in menuItems" 
         :key="index"
-        @click="selectItem(index)"
-        :class="['menu-item', { active: activeIndex === index }]"
+        @click="navigateTo(index)"
+        :class="['menu-button', { active: activeIndex === index }]"
         fill="clear"
       >
         {{ item }}
       </ion-button>
     </div>
-    <div class="timer-display">
-      <div>{{ formattedHours }}:{{ formattedMinutes }}:{{ formattedSeconds }}</div>
+    <div class="time-container" style="margin-top: 40px;"> <!-- Aumentada la separación -->
+      <div class="time-display">
+        <div class="time-value">
+          <span>{{ formattedHours }}</span>
+          <span class="time-label">Hours</span>
+        </div>
+        <div class="time-value">
+          <span>{{ formattedMinutes }}</span>
+          <span class="time-label">Minutes</span>
+        </div>
+        <div class="time-value">
+          <span>{{ formattedSeconds }}</span>
+          <span class="time-label">Seconds</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -21,6 +34,7 @@
 <script setup>
 import { IonButton } from '@ionic/vue';
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { useRouter } from 'vue-router';
 import PuigLogo from './PuigLogo.vue';
 
 const props = defineProps({
@@ -31,11 +45,14 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:activeIndex']);
+const router = useRouter();
 
 const menuItems = ref(['HOME', 'VOTING PAGE', 'MY PROFILE', 'TOP TIER', 'LOG OUT']);
+const routes = ['/', '/voting', '/profile', '/top-tier', '/logout'];
 
-const selectItem = (index) => {
+const navigateTo = (index) => {
   emit('update:activeIndex', index);
+  router.push(routes[index]);
 };
 
 // Timer logic
@@ -69,39 +86,98 @@ onBeforeUnmount(() => {
 <style scoped>
 .side-menu {
   width: 264px;
-  background: rgba(151, 10, 44, 0.47);
+  height: 650px; /* Increased height */
+  border: 10px solid rgba(151, 10, 44, 0.47);
   border-radius: 25px;
+  background: rgba(151, 10, 44, 0.47);
   padding: 20px;
   display: flex;
   flex-direction: column;
   position: relative;
+  gap: 40px; /* Aumentada la separación */
+  align-items: center; /* Centered items */
 }
 
-.menu-item {
-  width: 100%;
+.puig-logo {
+  width: 159px;
+  height: 91px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 0 auto;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Aumentada la separación */
+  align-items: center; /* Centered buttons */
+}
+
+.menu-button {
+  width: 228px;
   height: 54px;
+  border: 2px solid #970A2C;
   border-radius: 10px;
-  background: rgba(151, 10, 44, 0.8);
+  background: #970A2C;
   color: white;
-  margin-bottom: 10px;
-  --background: transparent;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  --background: #970A2C;
   --border-color: #970A2C;
   --border-style: solid;
   --border-width: 2px;
 }
 
-.menu-item.active {
-  --background: #970A2C;
+.menu-button.active {
+  --background: rgba(192, 192, 194, 0.19);
+  background: rgba(192, 192, 194, 0.19);
 }
 
-.timer-display {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #000;
-  padding: 10px 20px;
-  border-radius: 15px;
-  color: white;
+.time-container {
+  display: flex;
+  flex-direction: column;
+  width: 264px;
+  height: 98px;
+  padding: 24px;
+  align-items: center;
+  gap: 20px; /* Aumentada la separación */
+  flex-shrink: 0;
+  border-radius: 25px;
+  border: 10px solid #720D25;
+  background: #1F1F1F;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-</style> 
+
+.time-display {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Aumentada la separación */
+  margin-bottom: 8px;
+  flex-wrap: wrap; /* Allow labels to be below values */
+}
+
+.time-value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFF;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 0.32px;
+  padding-bottom: 10px; /* Added padding to center the text vertically */
+}
+
+.time-label {
+  color: var(--text-text-invert, #FFF);
+  text-align: center;
+  font-family: 'Open Sans';
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 100%; /* Ensure labels take full width */
+  text-align: center;
+}
+</style>

@@ -9,7 +9,7 @@ import NewBlock from '../views/Home/NewBlock.vue'
 import ProfilePage from '../views/Home/ProfilePage.vue'
 import VotePage from '../views/Home/VotePage.vue'
 import StatsPage from '../views/Home/StatsPage.vue'
-
+import SuccessLogout from '../views/Auth/SuccessLogout.vue'
 const routes: Array<RouteRecordRaw> = [
   /*
   {
@@ -24,6 +24,8 @@ const routes: Array<RouteRecordRaw> = [
   */
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login },
+  { path: '/logout', redirect: '/success-logout' },
+  { path: '/success-logout', component: SuccessLogout },
   { path: '/register', component: Register },
   { path: '/password-reset', component: PasswordReset },
   { path: '/home', component: HomePage },

@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-content class="ion-padding">
+    <ion-content>
       <!-- Versión móvil -->
       <div class="login-container mobile-only">
         <img src="../../../assets/images/login-imgs/background/green.png" alt="Background" class="background-img" />
@@ -23,7 +23,7 @@
       </div>
 
       <!-- Versión desktop -->
-      <div class="login-container desktop-only">
+      <div class="login-container desktop-only" style="background-image: url('../../assets/images/login-imgs/background/green.png'); background-size: cover; background-position: center;">
         <BackgroundLayer class="background-layer" />
         <LoginCard />
         <div class="login-right">
@@ -69,6 +69,13 @@ const login = () => {
 </script>
 
 <style scoped>
+ion-content::part(scroll) {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
 .background-layer {
   position: absolute;
   top: 0;
@@ -118,10 +125,10 @@ const login = () => {
   }
   
   .desktop-only {
-    display: flex;
+    display: flex;  
     flex-direction: row;
     justify-content: space-between;
-    padding: 2rem;
+    padding: 0; /* Eliminar el padding para que el efecto rojizo cubra toda la pantalla */
   }
 
   .login-right {
