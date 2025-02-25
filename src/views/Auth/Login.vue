@@ -33,9 +33,9 @@
           </div>
           <password-input placeholder="Usuario" type="text" v-model="email"></password-input>
           <password-input placeholder="Contraseña" type="password" v-model="password"></password-input><br>
-          <checkBox>
+          <CheckBox>
             Recordarme
-          </checkBox>
+          </CheckBox>
           <Submit>
           Login
         </Submit>
@@ -60,6 +60,8 @@ import Submit from '@/views/components/Inputs/Submit.vue';
 import PuigSounds from '@/views/components/ui/PuigSounds.vue';
 import BackgroundLayer from '@/views/components/Background/BackgroundLayer.vue';
 import LoginCard from '@/views/components/ui/LoginCard.vue';
+import SeparatorLine from '@/views/components/ui/SeparatorLine.vue';
+import CheckBox from '@/views/components/Clickable/CheckboxToggle.vue';
 const email = ref('');
 const password = ref('');
 

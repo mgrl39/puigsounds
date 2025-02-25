@@ -56,6 +56,8 @@ import { IonPage, IonContent, IonButton, IonText } from '@ionic/vue';
 import PasswordInput from '@/views/components/Inputs/PasswordInput.vue';
 import Submit from '@/views/components/Inputs/Submit.vue';
 import PuigSounds from '@/views/components/ui/PuigSounds.vue';
+import SeparatorLine from '@/views/components/ui/SeparatorLine.vue';
+import CheckBox from '@/views/components/Clickable/CheckboxToggle.vue';
 const email = ref('');
 const password = ref('');
 
