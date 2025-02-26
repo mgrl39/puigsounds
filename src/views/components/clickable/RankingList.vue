@@ -11,8 +11,8 @@
             {{ index + 1 }}
           </div>
         </div>
-        <div class="user-avatar" @click="openImagePopup(user.image)">
-          <img :src="user.image" alt="User avatar" class="avatar-img">
+        <div class="user-avatar" @click="openImagePopup(user.name)">
+          <img :src="`/assets/images/profile-pic/expand-${user.name.toLowerCase()}.png`" alt="User avatar" class="avatar-img">
         </div>
         <div class="user-info" @click="openUserPopup(user)">
           <h2 class="user-name">{{ user.name }}</h2>
@@ -35,7 +35,7 @@
     <!-- Popup para la imagen -->
     <ion-modal :is-open="showImagePopup" class="image-popup-modal" @didDismiss="closeImagePopup">
       <div class="image-popup-container">
-        <img :src="selectedImage" alt="Profile picture" class="popup-image">
+        <img :src="`/assets/images/profile-pic/expand-${selectedImage.toLowerCase()}.png`" alt="Profile picture" class="popup-image">
         <ion-button class="close-button" @click="closeImagePopup">
           Cerrar
         </ion-button>
@@ -45,7 +45,7 @@
     <!-- Popup para el usuario -->
     <ion-modal :is-open="showUserPopup" class="user-popup-modal" @didDismiss="closeUserPopup">
       <div class="user-popup-container">
-        <img :src="selectedUser?.image" alt="Profile picture" class="user-popup-image">
+        <img :src="`/assets/images/profile-pic/expand-${selectedUser?.name.toLowerCase()}.png`" alt="Profile picture" class="user-popup-image">
         <h3 class="user-popup-name">{{ selectedUser?.name }}</h3>
         <p class="user-popup-id">ID: {{ selectedUserId }}</p>
         <p class="user-popup-email">{{ generateEmail(selectedUser?.name) }}</p>
@@ -91,8 +91,8 @@ const selectedUser = ref(null);
 const selectedUserId = ref('');
 const selectedUserFollowers = ref(0);
 
-const openImagePopup = (image) => {
-  selectedImage.value = image;
+const openImagePopup = (name) => {
+  selectedImage.value = name;
   showImagePopup.value = true;
 };
 
