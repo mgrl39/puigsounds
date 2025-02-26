@@ -19,7 +19,15 @@
           <p class="user-points">{{ user.points }} points</p>
         </div>
         <div v-if="index < 3" class="trophy-icon">
-          <span>🏆</span>
+          <img 
+            :src="index === 0 ? '/assets/images/trophy/gold.png' : 
+                 index === 1 ? '/assets/images/trophy/silver.png' : 
+                 '/assets/images/trophy/bronze.png'"
+            :alt="index === 0 ? 'Gold trophy' :
+                  index === 1 ? 'Silver trophy' :
+                  'Bronze trophy'"
+            class="trophy-img"
+          >
         </div>
       </div>
     </div>
