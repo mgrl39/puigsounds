@@ -10,9 +10,9 @@
           </div>
       </div>
       <BasePopupOk
-        type="password" 
+        type="server" 
         :is-visible="showPopup"
-        logo-path="../../../assets/images/logo/puig-mini.png"
+        logo-path="../../../assets/images/logos/puig-mini.png"
         @close="showPopup = false"
       />
     </template>
@@ -39,13 +39,9 @@ const rankedUsers = ref([
 ]);
 
 const showPopup = ref(false);
-const popupMessage = ref('');
 
-const openPopup = (message) => {
-  console.log('Abriendo popup con mensaje:', message);
-  popupMessage.value = message;
+const openPopup = (type) => {
   showPopup.value = true;
-  console.log('Estado de showPopup:', showPopup.value);
 };
 </script>
 

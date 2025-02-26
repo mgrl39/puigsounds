@@ -45,7 +45,10 @@ const emit = defineEmits(['close']);
 // Ejemplo de manejo de diferentes mensajes
 const messages = {
   password: `You are unable to log in without<br><strong>a valid username and password</strong>`,
-  // Agregar más mensajes aquí
+  server: `The server is currently unresponsive.<br><strong>Please try again in a few minutes.</strong>`,
+  reset: `Your password reset link<br><strong>is now ready.</strong><br><strong>Please check your email to proceed</strong>`,
+  following: `You started following Yassine.<br><strong>The followers list is hidden.</strong>`,
+  unfollow: `You unfollowed Yassine.<br><strong>The followers list is visible.</strong>`,
 };
 
 const formattedContent = computed(() => messages[props.type] || '');
@@ -84,8 +87,6 @@ const closePopup = () => {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-top: -70px;
 }
 
 .popup-content {
