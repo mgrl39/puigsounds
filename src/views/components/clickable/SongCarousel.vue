@@ -1,42 +1,49 @@
 <template>
-  <div class="song-carousel">
-    <h2 class="carousel-title">Tomorrow's Song</h2>
-    <div class="carousel-container">
-      <div 
-        class="carousel-track" 
-        :style="trackStyle"
-        @mousedown="startDrag"
-        @mousemove="onDrag"
-        @mouseup="endDrag"
-        @mouseleave="endDrag"
-        @touchstart="startTouchDrag"
-        @touchmove="onTouchDrag"
-        @touchend="endTouchDrag"
-      >
+  <ion-card class="song-carousel">
+    <ion-card-header>
+      <ion-card-title class="carousel-title">Tomorrow's Song</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="carousel-container">
         <div 
-          v-for="(song, index) in songs" 
-          :key="index" 
-          class="song-card"
-          @click="voteForSong(song)"
+          class="carousel-track" 
+          :style="trackStyle"
+          @mousedown="startDrag"
+          @mousemove="onDrag"
+          @mouseup="endDrag"
+          @mouseleave="endDrag"
+          @touchstart="startTouchDrag"
+          @touchmove="onTouchDrag"
+          @touchend="endTouchDrag"
         >
-          <div 
-            class="song-image" 
-            :style="{ backgroundImage: `url(${song.image})` }"
-          ></div>
-          <div class="song-title">{{ song.title }}</div>
+          <ion-card
+            v-for="(song, index) in songs" 
+            :key="index" 
+            class="song-card"
+            @click="voteForSong(song)"
+          >
+            <ion-img 
+              :src="song.image"
+              class="song-image"
+            ></ion-img>
+            <ion-card-subtitle class="song-title">{{ song.title }}</ion-card-subtitle>
+          </ion-card>
         </div>
       </div>
-      
-    </div>
+    </ion-card-content>
 
-    <div v-if="showOverlay" class="vote-overlay">
-      {{ selectedSong }} VOTED SUCCESSFULLY
-    </div>
-  </div>
+    <ion-toast
+      :is-open="showOverlay"
+      :message="`${selectedSong} VOTED SUCCESSFULLY`"
+      :duration="1000"
+      position="middle"
+    ></ion-toast>
+  </ion-card>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, IonImg, IonToast } from '@ionic/vue';
 
 const currentSlide = ref(0);
 const showOverlay = ref(false);
@@ -45,7 +52,7 @@ const isDragging = ref(false);
 const startX = ref(0);
 const startOffset = ref(0);
 const dragOffset = ref(0);
-const dragThreshold = 10; // Umbral para distinguir entre clic y arrastre
+const dragThreshold = 10;
 const isAnimating = ref(false);
 
 const songs = ref([
@@ -87,8 +94,7 @@ const onDrag = (e) => {
   const diff = e.clientX - startX.value;
   dragOffset.value = startOffset.value + diff;
   
-  // Limitar el arrastre con efecto de resistencia
-  const maxOffset = 100; // Permitir un poco más para el efecto elástico
+  const maxOffset = 100;
   const minOffset = -((songs.value.length - 3) * 136) - 100;
   
   if (dragOffset.value > maxOffset) {
@@ -105,7 +111,6 @@ const endDrag = (e) => {
   
   isDragging.value = false;
   
-  // Verificar si estamos en los extremos para aplicar animación suave de retorno
   const maxOffset = 0;
   const minOffset = -((songs.value.length - 3) * 136);
   
@@ -126,7 +131,6 @@ const endDrag = (e) => {
   e.preventDefault();
 };
 
-// Soporte para dispositivos táctiles
 const startTouchDrag = (e) => {
   isDragging.value = true;
   startX.value = e.touches[0].clientX;
@@ -139,7 +143,6 @@ const onTouchDrag = (e) => {
   const diff = e.touches[0].clientX - startX.value;
   dragOffset.value = startOffset.value + diff;
   
-  // Limitar el arrastre con efecto de resistencia
   const maxOffset = 100;
   const minOffset = -((songs.value.length - 3) * 136) - 100;
   
@@ -157,7 +160,6 @@ const endTouchDrag = (e) => {
   
   isDragging.value = false;
   
-  // Verificar si estamos en los extremos para aplicar animación suave de retorno
   const maxOffset = 0;
   const minOffset = -((songs.value.length - 3) * 136);
   
@@ -177,14 +179,10 @@ const endTouchDrag = (e) => {
 };
 
 const voteForSong = (song) => {
-  // No votar si estamos arrastrando
   if (isDragging.value || Math.abs(dragOffset.value) > dragThreshold) return;
   
   selectedSong.value = song.title.toUpperCase();
   showOverlay.value = true;
-  setTimeout(() => {
-    showOverlay.value = false;
-  }, 1000);
 };
 </script>
 
@@ -192,9 +190,10 @@ const voteForSong = (song) => {
 .song-carousel {
   width: 396px;
   height: 214px;
-  border-radius: 25px;
-  background: #D9D9D9;
-  padding: 15px;
+  --border-radius: 25px;
+  --background: #D9D9D9;
+  margin: 0;
+  padding: 0 15px;
   position: relative;
   overflow: hidden;
 }
@@ -203,7 +202,6 @@ const voteForSong = (song) => {
   color: #850000;
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
-  text-align: center;
   margin-bottom: 15px;
   letter-spacing: -0.3px;
 }
@@ -232,6 +230,9 @@ const voteForSong = (song) => {
   flex: 0 0 120px;
   cursor: pointer;
   transition: transform 0.3s ease;
+  --background: transparent;
+  margin: 0;
+  box-shadow: none;
 }
 
 .song-card:hover {
@@ -242,8 +243,7 @@ const voteForSong = (song) => {
   width: 120px;
   height: 120px;
   border-radius: 10px;
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
   margin-bottom: 8px;
 }
 
@@ -256,42 +256,5 @@ const voteForSong = (song) => {
   text-align: center;
   line-height: 1.1;
   letter-spacing: -0.3px;
-}
-
-.nav-button {
-  background: rgba(151, 10, 44, 0.8);
-  border: none;
-  color: white;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-button:hover {
-  background: #970A2C;
-}
-
-.vote-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 15px 25px;
-  border-radius: 10px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  animation: fadeOut 1s forwards;
-}
-
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
 }
 </style>
