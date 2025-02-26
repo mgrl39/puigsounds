@@ -1,6 +1,6 @@
 <template>
   <div class="logo-container">
-    <div class="logo"></div>
+    <img src="../../../../favicon.png" class="logo" alt="Logo" />
     <h1 class="title">PuigSounds</h1>
   </div>
 </template>
@@ -17,7 +17,7 @@
   width: 76px;
   height: 71px;
   flex-shrink: 0;
-  background: url('@/assets/favicon.png') lightgray -24.68px -24.73px / 164.433% 179.213% no-repeat;
+  object-fit: contain;
 }
 
 .title {

@@ -1,7 +1,9 @@
 <template>
-  <div class="login-card">
-    <Logo />
-    <LoginForm />
+  <div class="container">
+    <div class="login-card">
+      <Logo />
+      <LoginForm />
+    </div>
   </div>
 </template>
 
@@ -11,6 +13,14 @@ import LoginForm from './LoginForm.vue';
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
 .login-card {
   width: 410px;
   height: 354px;

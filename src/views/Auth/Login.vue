@@ -8,13 +8,13 @@
           <img src="../../../favicon.png" alt="Logo" class="logo"/>
         </div>
         <PuigSounds />
-        <password-input placeholder="Username" type="text" v-model="email"></password-input><br>
-        <password-input placeholder="Password" type="password" v-model="password"></password-input>
+        <password-input placeholder="Usuario" type="text" v-model="email"></password-input><br>
+        <password-input placeholder="Contraseña" type="password" v-model="password"></password-input>
         <Submit>
           Login
         </Submit>
         <ion-text>
-          <p class="forgot-password">test?</p>
+          <p class="forgot-password">¿Olvidaste tu contraseña?</p>
         </ion-text>
         <SeparatorLine />
         <ion-text>
@@ -26,7 +26,7 @@
       <div class="login-container desktop-only" style="background-image: url('../../assets/images/login-imgs/background/green.png'); background-size: cover; background-position: center;">
         <BackgroundLayer class="background-layer" />
         <LoginCard />
-        <div class="login-right">
+        <div class="login-right mobile-only">
           
           <div class="logo-container">
             <img src="../../assets/favicon.png" alt="Logo" class="logo"/>
@@ -117,13 +117,13 @@ ion-content::part(scroll) {
   }
   
   .desktop-only {
-    display: none;
+    display: none !important;
   }
 }
 
 @media (min-width: 769px) {
   .mobile-only {
-    display: none;
+    display: none !important;
   }
   
   .desktop-only {
