@@ -47,8 +47,8 @@ const messages = {
   password: `You are unable to log in without<br><strong>a valid username and password</strong>`,
   server: `The server is currently unresponsive.<br><strong>Please try again in a few minutes.</strong>`,
   reset: `Your password reset link<br><strong>is now ready.</strong><br><strong>Please check your email to proceed</strong>`,
-  following: `You started following Yassine.<br><strong>The followers list is hidden.</strong>`,
-  unfollow: `You unfollowed Yassine.<br><strong>The followers list is visible.</strong>`,
+  following: `You started following this user.<br><strong>The followers list is hidden.</strong>`,
+  unfollow: `You unfollowed this user.<br><strong>The followers list is hidden.</strong>`,
 };
 
 const formattedContent = computed(() => messages[props.type] || '');

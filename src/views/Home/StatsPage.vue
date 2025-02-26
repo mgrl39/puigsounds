@@ -24,7 +24,6 @@ import { ref } from 'vue';
 import BaseLayout from '../components/layout/BaseLayout.vue';
 import RankingList from '../components/clickable/RankingList.vue';
 import BasePopupOk from '../components/popups/BasePopupOk.vue';
-
 const rankedUsers = ref([
   { name: 'Yassine', points: 4842, image: '../../../assets/images/profile-pic/pic-yassine.png' },
   { name: 'Brenda', points: 5313, image: '../../../assets/images/profile-pic/pic-brenda.png' },
