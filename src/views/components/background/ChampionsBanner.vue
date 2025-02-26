@@ -12,7 +12,7 @@
 <style scoped>
 .champions-banner {
   width: 100%;
-  max-width: 832px;
+  /*max-width: 832px;*/
   aspect-ratio: 832/142;
   border-radius: 25px;
   border: 10px solid #38111A;

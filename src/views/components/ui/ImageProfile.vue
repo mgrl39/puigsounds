@@ -2,7 +2,7 @@
   <div class="image-profile-container">
     <img :src="profileImage" alt="Profile Image" class="profile-image">
     <div class="profile-info">
-      <h2>@daniel.martinez</h2>
+      <h2 style="margin-top: 7px; color: #FFF; text-align: center; font-family: Montserrat; font-size: 20px; font-weight: 700; line-height: normal;">@daniel.martinez</h2>
       <!-- Aquí irían más detalles del perfil -->
     </div>
     
@@ -23,7 +23,7 @@ const profileImage = new URL('../../../../public/assets/images/profile-pic/princ
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  /* gap: 1rem; */
 }
 
 .profile-image {

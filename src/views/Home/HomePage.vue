@@ -1,12 +1,7 @@
 <template>
   <BaseLayout>
     <template #main-content>
-      <div class="main-section">
-        <div class="content-container">
-          <RankingList :ranked-users="rankedUsers" />
-          <MusicStats class="music-stats" />
-        </div>
-      </div>
+      <NextBellIn />
       <ChampionsBanner class="bottom-banner" />
     </template>
   </BaseLayout>
@@ -15,21 +10,9 @@
 <script setup>
 import { ref } from 'vue';
 import BaseLayout from '../components/layout/BaseLayout.vue';
-import MusicStats from '../components/ui/MusicStats.vue';
-import RankingList from '../components/clickable/RankingList.vue';
+import ChampionsBanner from '../components/background/ChampionsBanner.vue';
+import NextBellIn from '../components/ui/NextBellIn.vue';
 
-const rankedUsers = ref([
-  { name: 'Yassine', points: 4842, image: '../../../assets/images/profile-pic/pic-yassine.png' },
-  { name: 'Brenda', points: 5313, image: '../../../assets/images/profile-pic/pic-brenda.png' },
-  { name: 'CarlosIsaias', points: 2351, image: '../../../assets/images/profile-pic/pic-carlos.png' },
-  { name: 'Rohan', points: 1512, image: '../../../assets/images/profile-pic/pic-rohan.png' },
-  { name: 'Neil', points: 1114, image: '../../../assets/images/profile-pic/pic-neil.png' },
-  { name: 'Roly', points: 848, image: '../../../assets/images/profile-pic/pic-roly.png' },
-  { name: 'Levi', points: 509, image: '../../../assets/images/profile-pic/pic-levi.png' },
-  { name: 'Irene', points: 448, image: '../../../assets/images/profile-pic/pic-irene.png' },
-  { name: 'Zakaria', points: 448, image: '../../../assets/images/profile-pic/pic-zaka.png' },
-  { name: 'Jordi', points: 448, image: '../../../assets/images/profile-pic/pic-jordi.png' },
-]);
 </script>
 
 <style scoped>

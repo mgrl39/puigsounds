@@ -2,21 +2,9 @@
   <BaseLayout>
     <template #main-content>
       <div class="main-section">
-        <div class="stats-container">
-          <div class="left-section">
-            <div class="global-rank">
-              <h2>GLOBAL #127</h2>
-              <h3>DAW RANK #7</h3>
-            </div>
-            <div class="musical-genres">
-              <h3>Musical Genres</h3>
-              <MusicStats />
-            </div>
-          </div>
-          <div class="right-section">
+        <div class="right-section">
             <RankingList :ranked-users="rankedUsers" />
           </div>
-        </div>
       </div>
     </template>
   </BaseLayout>
@@ -25,7 +13,6 @@
 <script setup>
 import { ref } from 'vue';
 import BaseLayout from '../components/layout/BaseLayout.vue';
-import MusicStats from '../components/ui/MusicStats.vue';
 import RankingList from '../components/clickable/RankingList.vue';
 
 const rankedUsers = ref([
