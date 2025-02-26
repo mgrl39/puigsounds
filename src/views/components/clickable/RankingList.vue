@@ -47,7 +47,9 @@
       <div class="user-popup-container">
         <img :src="selectedUser?.image" alt="Profile picture" class="user-popup-image">
         <h3 class="user-popup-name">{{ selectedUser?.name }}</h3>
+        <p class="user-popup-id">ID: {{ selectedUserId }}</p>
         <p class="user-popup-email">{{ generateEmail(selectedUser?.name) }}</p>
+        <p class="user-popup-followers">{{ selectedUserFollowers }} Followers</p>
         <div class="user-popup-buttons">
           <ion-button class="follow-button" @click="handleFollow">
             FOLLOW
@@ -86,6 +88,8 @@ const showUserPopup = ref(false);
 const showFollowConfirmation = ref(false);
 const selectedImage = ref('');
 const selectedUser = ref(null);
+const selectedUserId = ref('');
+const selectedUserFollowers = ref(0);
 
 const openImagePopup = (image) => {
   selectedImage.value = image;
@@ -98,6 +102,8 @@ const closeImagePopup = () => {
 
 const openUserPopup = (user) => {
   selectedUser.value = user;
+  selectedUserId.value = generateRandomId();
+  selectedUserFollowers.value = generateRandomFollowers();
   showUserPopup.value = true;
 };
 
@@ -108,6 +114,14 @@ const closeUserPopup = () => {
 const generateEmail = (name) => {
   if (!name) return '';
   return `${name.toLowerCase()}@elpuig.xeill.net`;
+};
+
+const generateRandomId = () => {
+  return Math.floor(Math.random() * 900000) + 100000;
+};
+
+const generateRandomFollowers = () => {
+  return Math.floor(Math.random() * 9000) + 1000;
 };
 
 const handleFollow = () => {
@@ -305,10 +319,23 @@ const handleFollow = () => {
   margin: 10px 0;
 }
 
+.user-popup-id {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  margin: 5px 0;
+}
+
 .user-popup-email {
   font-size: 16px;
   color: rgba(255,255,255,0.8);
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+.user-popup-followers {
+  font-size: 18px;
+  color: #970A2C;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .user-popup-buttons {
@@ -326,4 +353,4 @@ const handleFollow = () => {
   font-weight: bold;
   font-size: 16px;
 }
-</style> 
+</style>
