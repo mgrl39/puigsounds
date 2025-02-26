@@ -1,6 +1,7 @@
 <template>
   <BaseLayout>
     <template #main-content>
+      <MusicPlayer />
       <NextBellIn />
       <ChampionsBanner 
         class="bottom-banner"
@@ -40,7 +41,7 @@ const handleChampionsClick = async () => {
 import BaseLayout from '../components/layout/BaseLayout.vue';
 import ChampionsBanner from '../components/background/ChampionsBanner.vue';
 import NextBellIn from '../components/ui/NextBellIn.vue';
-
+import MusicPlayer from '../components/ui/MusicPlayer.vue';
 </script>
 
 <style scoped>
