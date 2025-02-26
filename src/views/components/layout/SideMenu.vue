@@ -33,8 +33,8 @@
 
 <script setup>
 import { IonButton } from '@ionic/vue';
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import PuigLogo from '@/views/components/common/PuigLogo.vue';
 
 const props = defineProps({
@@ -46,9 +46,30 @@ const props = defineProps({
 
 const emit = defineEmits(['update:activeIndex']);
 const router = useRouter();
+const route = useRoute();
 
 const menuItems = ref(['HOME', 'VOTING PAGE', 'MY PROFILE', 'TOP TIER', 'LOG OUT']);
-const routes = ['/', '/vote', '/profile', '/top-tier', '/logout'];
+const routes = ['/', '/vote', '/profile', '/stats', '/logout'];
+
+// Actualizar el índice activo basado en la ruta actual
+onMounted(() => {
+  const currentPath = route.path;
+  const routeIndex = routes.findIndex(r => r === currentPath);
+  if (routeIndex !== -1 && routeIndex !== props.activeIndex) {
+    emit('update:activeIndex', routeIndex);
+  }
+});
+
+// Observar cambios en la ruta para mantener sincronizado el botón activo
+watch(
+  () => route.path,
+  (newPath) => {
+    const routeIndex = routes.findIndex(r => r === newPath);
+    if (routeIndex !== -1 && routeIndex !== props.activeIndex) {
+      emit('update:activeIndex', routeIndex);
+    }
+  }
+);
 
 const navigateTo = (index) => {
   emit('update:activeIndex', index);
@@ -131,6 +152,9 @@ onBeforeUnmount(() => {
 .menu-button.active {
   --background: rgba(192, 192, 194, 0.19);
   background: rgba(192, 192, 194, 0.19);
+  border-color: #ffffff;
+  --border-color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .time-container {
