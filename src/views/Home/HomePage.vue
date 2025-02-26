@@ -19,16 +19,16 @@ import MusicStats from '../components/ui/MusicStats.vue';
 import RankingList from '../components/clickable/RankingList.vue';
 
 const rankedUsers = ref([
-  { name: 'Yassine', points: 4842, image: '../../../assets/images/profile-imgs/pic-yassine.png' },
-  { name: 'Brenda', points: 5313, image: '../../../assets/images/profile-imgs/pic-brenda.png' },
-  { name: 'CarlosIsaias', points: 2351, image: '../../../assets/images/profile-imgs/pic-carlos.png' },
-  { name: 'Rohan', points: 1512, image: '../../../assets/images/profile-imgs/pic-rohan.png' },
-  { name: 'Neil', points: 1114, image: '../../../assets/images/profile-imgs/pic-neil.png' },
-  { name: 'Roly', points: 848, image: '../../../assets/images/profile-imgs/pic-roly.png' },
-  { name: 'Levi', points: 509, image: '../../../assets/images/profile-imgs/pic-levi.png' },
-  { name: 'Irene', points: 448, image: '../../../assets/images/profile-imgs/pic-irene.png' },
-  { name: 'Zakaria', points: 448, image: '../../../assets/images/profile-imgs/pic-zaka.png' },
-  { name: 'Jordi', points: 448, image: '../../../assets/images/profile-imgs/pic-jordi.png' },
+  { name: 'Yassine', points: 4842, image: '../../../assets/images/profile-pic/pic-yassine.png' },
+  { name: 'Brenda', points: 5313, image: '../../../assets/images/profile-pic/pic-brenda.png' },
+  { name: 'CarlosIsaias', points: 2351, image: '../../../assets/images/profile-pic/pic-carlos.png' },
+  { name: 'Rohan', points: 1512, image: '../../../assets/images/profile-pic/pic-rohan.png' },
+  { name: 'Neil', points: 1114, image: '../../../assets/images/profile-pic/pic-neil.png' },
+  { name: 'Roly', points: 848, image: '../../../assets/images/profile-pic/pic-roly.png' },
+  { name: 'Levi', points: 509, image: '../../../assets/images/profile-pic/pic-levi.png' },
+  { name: 'Irene', points: 448, image: '../../../assets/images/profile-pic/pic-irene.png' },
+  { name: 'Zakaria', points: 448, image: '../../../assets/images/profile-pic/pic-zaka.png' },
+  { name: 'Jordi', points: 448, image: '../../../assets/images/profile-pic/pic-jordi.png' },
 ]);
 </script>
 
