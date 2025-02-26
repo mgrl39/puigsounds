@@ -5,7 +5,7 @@
         <div class="vote-container">
           <h2>Tomorrow's Song</h2>
           <div class="song-cards">
-            <!-- Aquí irían las tarjetas de canciones para votar -->
+            <SongCarousel />
           </div>
           <div class="votes-graph">
             <h3>VOTES: 700</h3>
@@ -19,6 +19,7 @@
 
 <script setup>
 import BaseLayout from '@/views/components/layout/BaseLayout.vue';
+import SongCarousel from '@/views/components/clickable/SongCarousel.vue';
 </script>
 
 <style scoped>

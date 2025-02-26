@@ -18,8 +18,8 @@
         </ion-text>
         <SeparatorLine />
         <ion-text>
-          <p class="signup-text">¿No tienes una cuenta? <router-link to="/signup" class="signup-link">Regístrate</router-link></p>
-        </ion-text>
+          <p class="signup-text">¿No tienes una cuenta? <router-link to="/register" class="signup-link">Regístrate</router-link></p>
+        </ion-text> 
       </div>
 
       <!-- Versión desktop -->
@@ -27,23 +27,19 @@
         <BackgroundLayer class="background-layer" />
         <LoginCard />
         <div class="login-right mobile-only">
-          
-          <div class="logo-container">
-            <img src="../../assets/favicon.png" alt="Logo" class="logo"/>
-          </div>
           <password-input placeholder="Usuario" type="text" v-model="email"></password-input>
           <password-input placeholder="Contraseña" type="password" v-model="password"></password-input><br>
           <CheckBox>
             Recordarme
           </CheckBox>
           <Submit>
-          Login
+          {{ email && password ? 'Login' : 'Complete the fields' }}
         </Submit>
           <ion-text>
-            <p class="forgot-password">¿Olvidaste tu contraseña?</p>
+            <p class="forgot-password">Forgot your password?</p>
           </ion-text>
           <ion-text>
-            <p class="signup-text">¿No tienes una cuenta? <router-link to="/signup" class="signup-link">Regístrate</router-link></p>
+            <p class="signup-text">Don't have an account? <a to="/register" class="signup-link">Sign Up</a></p>
           </ion-text>
         </div>
       </div>
@@ -151,6 +147,7 @@ ion-content::part(scroll) {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  opacity: 0.8; /* Añadida opacidad a la imagen de fondo */
 }
 
 .logo-container {
@@ -174,6 +171,7 @@ ion-content::part(scroll) {
 .desktop-only {
   background-size: cover;
   background-position: center;
+  opacity: 0.9; /* Añadida opacidad al contenedor desktop */
 }
 
 /* Asegurar que todo el contenido esté por encima del fondo */
