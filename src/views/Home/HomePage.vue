@@ -3,23 +3,7 @@
     <template #main-content>
       <div class="main-section">
         <div class="content-container">
-          <ion-content class="ranking-container">
-            <ion-list class="ranking-list">
-              <ion-item 
-                v-for="(user, index) in rankedUsers"
-                :key="user.name"
-                class="user-item"
-              >
-                <div class="rank-circle">
-                  {{ index + 1 }}
-                </div>
-                <ion-label class="user-info">
-                  <h2>{{ user.name }}</h2>
-                  <p>{{ user.points }} points</p>
-                </ion-label>
-              </ion-item>
-            </ion-list>
-          </ion-content>
+          <RankingList :ranked-users="rankedUsers" />
           <MusicStats class="music-stats" />
         </div>
       </div>
@@ -29,15 +13,22 @@
 </template>
 
 <script setup>
-import { IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
 import { ref } from 'vue';
 import BaseLayout from '../components/layout/BaseLayout.vue';
 import MusicStats from '../components/ui/MusicStats.vue';
+import RankingList from '../components/clickable/RankingList.vue';
 
 const rankedUsers = ref([
-  { name: 'Yassine', points: 4842 },
-  { name: 'Brenda', points: 5313 },
-  // ... resto de usuarios
+  { name: 'Yassine', points: 4842, image: '../../../assets/images/profile-imgs/pic-yassine.png' },
+  { name: 'Brenda', points: 5313, image: '../../../assets/images/profile-imgs/pic-brenda.png' },
+  { name: 'CarlosIsaias', points: 2351, image: '../../../assets/images/profile-imgs/pic-carlos.png' },
+  { name: 'Rohan', points: 1512, image: '../../../assets/images/profile-imgs/pic-rohan.png' },
+  { name: 'Neil', points: 1114, image: '../../../assets/images/profile-imgs/pic-neil.png' },
+  { name: 'Roly', points: 848, image: '../../../assets/images/profile-imgs/pic-roly.png' },
+  { name: 'Levi', points: 509, image: '../../../assets/images/profile-imgs/pic-levi.png' },
+  { name: 'Irene', points: 448, image: '../../../assets/images/profile-imgs/pic-irene.png' },
+  { name: 'Zakaria', points: 448, image: '../../../assets/images/profile-imgs/pic-zaka.png' },
+  { name: 'Jordi', points: 448, image: '../../../assets/images/profile-imgs/pic-jordi.png' },
 ]);
 </script>
 

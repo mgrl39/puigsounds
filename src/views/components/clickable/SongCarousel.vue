@@ -1,10 +1,7 @@
 <template>
   <div class="song-carousel">
     <h2 class="carousel-title">Tomorrow's Song</h2>
-    
     <div class="carousel-container">
-      <button class="nav-button left" @click="prevSlide">&lt;</button>
-      
       <div 
         class="carousel-track" 
         :style="trackStyle"
@@ -30,7 +27,6 @@
         </div>
       </div>
       
-      <button class="nav-button right" @click="nextSlide">&gt;</button>
     </div>
 
     <div v-if="showOverlay" class="vote-overlay">
