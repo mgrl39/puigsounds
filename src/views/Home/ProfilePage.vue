@@ -38,7 +38,7 @@ import MusicStats from '@/views/components/ui/MusicStats.vue';
 }
 
 .stats-container {
-  margin-top: -60px;
+  margin-top: -40px;
   margin-left: 20px;
   display: flex;
   flex-direction: column;
