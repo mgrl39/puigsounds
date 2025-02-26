@@ -4,8 +4,17 @@
       <div class="main-section">
         <div class="right-section">
             <RankingList :ranked-users="rankedUsers" />
+            <button class="popup-button" @click="openPopup('¡Este es un mensaje de prueba!')">
+              Mostrar Popup
+            </button>
           </div>
       </div>
+      <BasePopupOk
+        type="password" 
+        :is-visible="showPopup"
+        logo-path="../../../assets/images/logo/puig-mini.png"
+        @close="showPopup = false"
+      />
     </template>
   </BaseLayout>
 </template>
@@ -14,6 +23,7 @@
 import { ref } from 'vue';
 import BaseLayout from '../components/layout/BaseLayout.vue';
 import RankingList from '../components/clickable/RankingList.vue';
+import BasePopupOk from '../components/popups/BasePopupOk.vue';
 
 const rankedUsers = ref([
   { name: 'Yassine', points: 4842, image: '../../../assets/images/profile-pic/pic-yassine.png' },
@@ -27,6 +37,16 @@ const rankedUsers = ref([
   { name: 'Zakaria', points: 448, image: '../../../assets/images/profile-pic/pic-zaka.png' },
   { name: 'Jordi', points: 448, image: '../../../assets/images/profile-pic/pic-jordi.png' },
 ]);
+
+const showPopup = ref(false);
+const popupMessage = ref('');
+
+const openPopup = (message) => {
+  console.log('Abriendo popup con mensaje:', message);
+  popupMessage.value = message;
+  showPopup.value = true;
+  console.log('Estado de showPopup:', showPopup.value);
+};
 </script>
 
 <style scoped>
@@ -72,6 +92,20 @@ const rankedUsers = ref([
 .musical-genres h3 {
   margin: 0 0 20px 0;
   color: white;
+}
+
+.popup-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: rgba(151, 10, 44, 0.8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.popup-button:hover {
+  background-color: rgba(151, 10, 44, 1);
 }
 
 @media (max-width: 768px) {
