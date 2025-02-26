@@ -54,7 +54,7 @@ import { ref } from 'vue';
 import SideMenu from '../components/layout/SideMenu.vue';
 import ContentArea from '../components/layout/ContentArea.vue';
 import CurrentSong from '../components/dashboard/CurrentSong.vue';
-import ChampionsBanner from '../components/Background/ChampionsBanner.vue';
+import ChampionsBanner from '../components/background/ChampionsBanner.vue';
 
 const activeIndex = ref(0);
 

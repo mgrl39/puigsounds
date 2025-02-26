@@ -27,7 +27,7 @@
 import BaseLayout from '@/views/components/layout/BaseLayout.vue';
 import ImageProfile from '@/views/components/ui/ImageProfile.vue';
 import RankBox from '@/views/components/rankings/RankBox.vue';
-import CustomButton from '@/views/components/Clickable/CustomButton.vue';
+import CustomButton from '@/views/components/clickable/CustomButton.vue';
 import MusicStats from '@/views/components/ui/MusicStats.vue';
 </script>
 
