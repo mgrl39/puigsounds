@@ -49,7 +49,7 @@ const router = useRouter();
 const route = useRoute();
 
 const menuItems = ref(['HOME', 'VOTING PAGE', 'MY PROFILE', 'TOP TIER', 'LOG OUT']);
-const routes = ['/', '/vote', '/profile', '/stats', '/logout'];
+const routes = ['/home', '/vote', '/profile', '/stats', '/logout'];
 
 // Actualizar el índice activo basado en la ruta actual
 onMounted(() => {
