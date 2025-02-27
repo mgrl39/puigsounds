@@ -113,12 +113,15 @@ const openPopup = (type) => {
 }
 
 @media (max-width: 768px) {
-  .stats-container {
-    width: 100%;
-    height: auto;
+  .main-section {
     flex-direction: column;
+    padding-bottom: 70px; /* Espacio para la navbar */
   }
-
+  
+  .left-section {
+    display: none;
+  }
+  
   .right-section {
     width: 100%;
   }

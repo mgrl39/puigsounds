@@ -73,4 +73,28 @@ import MusicStats from '@/views/components/ui/MusicStats.vue';
   justify-content: flex-end;
   margin-top: 20px;
 }
+
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+  }
+  
+  .profile-info {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .stats-container {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  
+  .buttons-container {
+    justify-content: center;
+  }
+  
+  .profile-container {
+    padding-bottom: 70px; /* Espacio para la navbar */
+  }
+}
 </style>

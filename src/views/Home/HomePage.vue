@@ -144,6 +144,10 @@ import MusicPlayer from '../components/ui/MusicPlayer.vue';
   .right-content {
     display: none;
   }
+  
+  .left-content {
+    padding-bottom: 70px; /* Espacio para la navbar */
+  }
 }
 
 .home-page-wrapper {

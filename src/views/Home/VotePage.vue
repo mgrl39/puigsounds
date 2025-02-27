@@ -104,6 +104,16 @@ import SongBattle from '@/views/components/dashboard/SongBattle.vue';
 }
 
 @media (max-width: 768px) {
+  .main-section {
+    flex-direction: column;
+    padding-bottom: 70px; /* Espacio para la navbar */
+  }
+  
+  .left-column,
+  .middle-column {
+    max-width: 100%;
+  }
+  
   .middle-content {
     flex-direction: column;
   }
