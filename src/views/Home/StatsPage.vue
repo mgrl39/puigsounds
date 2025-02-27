@@ -11,8 +11,9 @@
       </div>
         <div class="left-section">
           <ion-img 
-            src="../../../assets/images/.png"
+            src="../../../assets/images/shades/trophy-shade.png"
             class="main-image"
+            style="opacity: 0.6; margin: auto;"
           ></ion-img>
         </div>
       <!-- <BasePopupOk
