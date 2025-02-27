@@ -11,10 +11,10 @@
           />
         </div>
         <div class="right-content">
-          <ion-img 
+          <IonImg 
             src="../../../assets/images/logos/puig-love2.png"
             class="heart-background"
-          ></ion-img>
+          ></IonImg>
         </div>
       </div>
     </template>
@@ -23,7 +23,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { alertController } from '@ionic/vue';
+import { alertController, IonImg } from '@ionic/vue';
 
 const showClickText = ref(false);
 
