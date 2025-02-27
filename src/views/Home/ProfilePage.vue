@@ -1,6 +1,9 @@
 <template>
   <BaseLayout>
     <template #main-content>
+      <!-- Añadir UserHeader para versión móvil -->
+      <UserHeader class="mobile-header" />
+      
       <div class="main-section">
         <div class="profile-container">
           <div class="profile-header">
@@ -29,6 +32,7 @@ import BaseLayout from '@/views/components/layout/BaseLayout.vue';
 import RankBox from '@/views/components/rankings/RankBox.vue';
 import CustomButton from '@/views/components/clickable/CustomButton.vue';
 import MusicStats from '@/views/components/ui/MusicStats.vue';
+import UserHeader from '@/views/components/layout/UserHeader.vue'; // Importar UserHeader
 </script>
 
 <style scoped>
@@ -74,7 +78,15 @@ import MusicStats from '@/views/components/ui/MusicStats.vue';
   margin-top: 20px;
 }
 
+.mobile-header {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .mobile-header {
+    display: block;
+  }
+  
   .profile-header {
     flex-direction: column;
   }

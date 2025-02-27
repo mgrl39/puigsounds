@@ -1,6 +1,9 @@
 <template>
   <BaseLayout>
     <template #main-content>
+      <!-- Añadir UserHeader en la vista móvil -->
+      <UserHeader class="mobile-header" />
+      
       <div class="main-section">
         <div class="left-column">
           <div class="song-cards">
@@ -30,6 +33,7 @@ import VotingChar from '@/views/components/dashboard/VotingChar.vue';
 import VotingStats from '@/views/components/dashboard/VotingStats.vue';
 import TrendingVotes from '@/views/components/dashboard/TrendingVotes.vue';
 import SongBattle from '@/views/components/dashboard/SongBattle.vue';
+import UserHeader from '../components/layout/UserHeader.vue';
 </script>
 
 <style scoped>
@@ -121,5 +125,13 @@ import SongBattle from '@/views/components/dashboard/SongBattle.vue';
   .highlight-card {
     display: none;
   }
+  
+  .mobile-header {
+    display: block;
+  }
+}
+
+.mobile-header {
+  display: none;
 }
 </style>

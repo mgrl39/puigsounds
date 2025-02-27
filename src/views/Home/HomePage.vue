@@ -2,6 +2,8 @@
   <div class="home-page-wrapper">
     <BaseLayout>
       <template #main-content>
+        <UserHeader class="mobile-header" :userName="userName" />
+        
         <div class="home-container">
           <div class="left-content">
             <MusicPlayer class="music-player" />
@@ -27,6 +29,7 @@
 import { ref } from 'vue';
 import { alertController, IonImg } from '@ionic/vue';
 const showClickText = ref(false);
+const userName = ref('Daniel Martinez');
 
 const handleChampionsClick = async () => {
   const alert = await alertController.create({
@@ -53,6 +56,7 @@ import BaseLayout from '../components/layout/BaseLayout.vue';
 import ChampionsBanner from '../components/background/ChampionsBanner.vue';
 import NextBellIn from '../components/ui/NextBellIn.vue';
 import MusicPlayer from '../components/ui/MusicPlayer.vue';
+import UserHeader from '../components/layout/UserHeader.vue';
 </script>
 
 <style scoped>
@@ -136,7 +140,15 @@ import MusicPlayer from '../components/ui/MusicPlayer.vue';
   }
 }
 
+.mobile-header {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .mobile-header {
+    display: block;
+  }
+  
   .home-container {
     flex-direction: column;
   }

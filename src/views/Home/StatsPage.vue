@@ -1,6 +1,9 @@
 <template>
   <BaseLayout>
     <template #main-content>
+      <!-- Añadir UserHeader para versión móvil -->
+      <UserHeader class="mobile-header" />
+      
       <div class="main-section">
         <div class="right-section">
             <RankingList :ranked-users="rankedUsers" />
@@ -10,7 +13,6 @@
           </div>
       </div>
         <div class="left-section">
-
           <IonImg 
             src="../../../assets/images/shades/trophy-shade.png"
             class="main-image"
@@ -33,6 +35,8 @@ import { IonImg } from '@ionic/vue';
 import BaseLayout from '../components/layout/BaseLayout.vue';
 import RankingList from '../components/clickable/RankingList.vue';
 import BasePopupOk from '../components/popups/BasePopupOk.vue';
+import UserHeader from '../components/layout/UserHeader.vue'; // Importar UserHeader
+
 const rankedUsers = ref([
   { name: 'Yassine', points: 4842, image: '../../../assets/images/profile-pic/pic-yassine.png' },
   { name: 'Brenda', points: 5313, image: '../../../assets/images/profile-pic/pic-brenda.png' },
@@ -112,7 +116,15 @@ const openPopup = (type) => {
   background-color: rgba(151, 10, 44, 1);
 }
 
+.mobile-header {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .mobile-header {
+    display: block;
+  }
+  
   .main-section {
     flex-direction: column;
     padding-bottom: 70px; /* Espacio para la navbar */
