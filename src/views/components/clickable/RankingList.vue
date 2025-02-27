@@ -145,6 +145,7 @@ const handleFollow = () => {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  align-items: center;
 }
 
 .user-item {
@@ -352,5 +353,69 @@ const handleFollow = () => {
   height: 45px;
   font-weight: bold;
   font-size: 16px;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+  .ranking-container {
+    width: 95%;
+    max-width: 450px;
+    height: auto;
+    max-height: calc(100vh - 70px);
+    margin: 0 auto;
+    padding-bottom: 20px;
+    margin-bottom: 70px;
+  }
+  
+  .user-item {
+    width: 100%;
+    max-width: 327px;
+  }
+  
+  .user-name {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+  }
+  
+  .user-points {
+    font-size: 12px;
+  }
+  
+  .avatar-img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .trophy-img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 375px) {
+  .ranking-container {
+    padding: 10px;
+    border-width: 5px;
+  }
+  
+  .user-item {
+    padding: 0 10px;
+    height: 80px;
+  }
+  
+  .rank-circle {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+  
+  .avatar-img {
+    width: 36px;
+    height: 36px;
+  }
 }
 </style>
