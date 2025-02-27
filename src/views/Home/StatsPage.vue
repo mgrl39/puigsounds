@@ -7,9 +7,9 @@
       <div class="main-section">
         <div class="right-section">
             <RankingList :ranked-users="rankedUsers" />
-            <!-- <button class="popup-button" @click="openPopup('¡Este es un mensaje de prueba!')">
-              Mostrar Popup
-            </button> -->
+            <button class="popup-button" @click="showPopup = true">
+              Cambiar Perfil
+            </button>
           </div>
       </div>
         <div class="left-section">
@@ -19,12 +19,10 @@
             style="opacity: 0.6; margin: auto;"
           />
         </div>
-      <!-- <BasePopupOk
-        type="server" 
+      <ChangeProfilePopup
         :is-visible="showPopup"
-        logo-path="../../../assets/images/logos/puig-mini.png"
         @close="showPopup = false"
-      /> -->
+      />
     </template>
   </BaseLayout>
 </template>
@@ -34,11 +32,11 @@ import { ref } from 'vue';
 import { IonImg } from '@ionic/vue';
 import BaseLayout from '../components/layout/BaseLayout.vue';
 import RankingList from '../components/clickable/RankingList.vue';
-import BasePopupOk from '../components/popups/BasePopupOk.vue';
+import ChangeProfilePopup from '../components/popups/ChangeProfilePopup.vue'; // Importar ChangeProfilePopup
 import UserHeader from '../components/layout/UserHeader.vue'; // Importar UserHeader
 
 const rankedUsers = ref([
-  { name: 'Yassine', points: 4842, image: '../../../assets/images/profile-pic/pic-yassine.png' },
+  { name: 'Said', points: 4842, image: '../../../assets/images/profile-pic/pic-said.png' },
   { name: 'Brenda', points: 5313, image: '../../../assets/images/profile-pic/pic-brenda.png' },
   { name: 'CarlosIsaias', points: 2351, image: '../../../assets/images/profile-pic/pic-carlos.png' },
   { name: 'Rohan', points: 1512, image: '../../../assets/images/profile-pic/pic-rohan.png' },
@@ -51,10 +49,6 @@ const rankedUsers = ref([
 ]);
 
 const showPopup = ref(false);
-
-const openPopup = (type) => {
-  showPopup.value = true;
-};
 </script>
 
 <style scoped>
