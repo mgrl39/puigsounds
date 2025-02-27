@@ -10,11 +10,12 @@
           </div>
       </div>
         <div class="left-section">
-          <ion-img 
+
+          <IonImg 
             src="../../../assets/images/shades/trophy-shade.png"
             class="main-image"
             style="opacity: 0.6; margin: auto;"
-          ></ion-img>
+          />
         </div>
       <!-- <BasePopupOk
         type="server" 
@@ -28,6 +29,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { IonImg } from '@ionic/vue';
 import BaseLayout from '../components/layout/BaseLayout.vue';
 import RankingList from '../components/clickable/RankingList.vue';
 import BasePopupOk from '../components/popups/BasePopupOk.vue';
