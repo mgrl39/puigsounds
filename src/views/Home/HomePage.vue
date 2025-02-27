@@ -1,30 +1,31 @@
 <template>
-  <BaseLayout>
-    <template #main-content>
-      <div class="home-container">
-        <div class="left-content">
-          <MusicPlayer class="music-player" />
-          <NextBellIn class="next-bell" />
-          <ChampionsBanner 
-            class="bottom-banner"
-            @click="handleChampionsClick"
-          />
+  <div class="home-page-wrapper">
+    <BaseLayout>
+      <template #main-content>
+        <div class="home-container">
+          <div class="left-content">
+            <MusicPlayer class="music-player" />
+            <NextBellIn class="next-bell" />
+            <ChampionsBanner 
+              class="bottom-banner"
+              @click="handleChampionsClick"
+            />
+          </div>
+          <div class="right-content">
+            <IonImg 
+              src="../../../assets/images/logos/puig-love2.png"
+              class="heart-background"
+            ></IonImg>
+          </div>
         </div>
-        <div class="right-content">
-          <IonImg 
-            src="../../../assets/images/logos/puig-love2.png"
-            class="heart-background"
-          ></IonImg>
-        </div>
-      </div>
-    </template>
-  </BaseLayout>
+      </template>
+    </BaseLayout>
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { alertController, IonImg } from '@ionic/vue';
-
 const showClickText = ref(false);
 
 const handleChampionsClick = async () => {
@@ -143,5 +144,9 @@ import MusicPlayer from '../components/ui/MusicPlayer.vue';
   .right-content {
     display: none;
   }
+}
+
+.home-page-wrapper {
+  display: contents;
 }
 </style> 

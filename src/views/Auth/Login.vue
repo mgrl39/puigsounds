@@ -39,7 +39,7 @@
             <p class="forgot-password">Forgot your password?</p>
           </ion-text>
           <ion-text>
-            <p class="signup-text">Don't have an account? <a to="/register" class="signup-link">Sign Up</a></p>
+            <p class="signup-text">Don't have an account? <router-link to="/register" class="signup-link">Sign Up</router-link></p>
           </ion-text>
         </div>
       </div>
