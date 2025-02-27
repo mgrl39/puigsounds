@@ -4,17 +4,23 @@
       <div class="main-section">
         <div class="right-section">
             <RankingList :ranked-users="rankedUsers" />
-            <button class="popup-button" @click="openPopup('¡Este es un mensaje de prueba!')">
+            <!-- <button class="popup-button" @click="openPopup('¡Este es un mensaje de prueba!')">
               Mostrar Popup
-            </button>
+            </button> -->
           </div>
       </div>
-      <BasePopupOk
+        <div class="left-section">
+          <ion-img 
+            src="../../../assets/images/.png"
+            class="main-image"
+          ></ion-img>
+        </div>
+      <!-- <BasePopupOk
         type="server" 
         :is-visible="showPopup"
         logo-path="../../../assets/images/logos/puig-mini.png"
         @close="showPopup = false"
-      />
+      /> -->
     </template>
   </BaseLayout>
 </template>
