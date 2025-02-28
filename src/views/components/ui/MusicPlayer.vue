@@ -57,11 +57,15 @@ const togglePlay = () => {
 <style scoped>
 .music-player {
   padding: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .player-container {
-  width: 388px;
-  height: 120px;
+  width: 100%;
+  max-width: 388px;
+  min-height: 120px;
   border-radius: 25px;
   background: #D9D9D9;
   box-shadow: inset 0px -2px 4px rgba(0, 0, 0, 0.25);
@@ -69,6 +73,7 @@ const togglePlay = () => {
   align-items: center;
   padding: 5px 15px;
   position: relative;
+  gap: 15px;
 }
 
 .album-art {
@@ -83,31 +88,37 @@ const togglePlay = () => {
 }
 
 .song-info {
-  margin-left: 15px;
   flex-grow: 1;
+  min-width: 0;
 }
 
 .song-title {
   color: #131313;
   font-family: 'Montserrat', sans-serif;
-  font-size: 25px;
+  font-size: clamp(18px, 5vw, 25px);
   font-weight: 700;
   margin: 0;
   line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .song-artist {
   color: rgba(19, 19, 19, 0.6);
   font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
+  font-size: clamp(12px, 3vw, 15px);
   font-weight: 700;
   margin: 5px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .play-button {
   position: relative;
-  width: 71px;
-  height: 71px;
+  width: clamp(50px, 15vw, 71px);
+  height: clamp(50px, 15vw, 71px);
   border: none;
   background: none;
   cursor: pointer;
@@ -119,8 +130,8 @@ const togglePlay = () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 71px;
-  height: 71px;
+  width: 100%;
+  height: 100%;
 }
 
 .play-icon {
@@ -128,12 +139,34 @@ const togglePlay = () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 47px;
-  height: 47px;
+  width: 66%;
+  height: 66%;
   transition: transform 0.2s ease;
 }
 
 .play-button:hover .play-icon {
   transform: translate(-50%, -50%) scale(1.1);
+}
+
+@media (max-width: 480px) {
+  .player-container {
+    padding: 5px 10px;
+  }
+
+  .album-art {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 320px) {
+  .album-art {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .player-container {
+    min-height: 90px;
+  }
 }
 </style>  

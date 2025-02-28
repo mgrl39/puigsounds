@@ -34,14 +34,14 @@ const userName = ref('Daniel Martinez');
 const handleChampionsClick = async () => {
   const alert = await alertController.create({
     header: 'Champions',
-    message: '¿Quieres abrir el enlace de Champions?',
+    message: 'Do you want to open the Champions link?',
     buttons: [
       {
-        text: 'Cancelar',
+        text: 'Cancel',
         role: 'cancel'
       },
       {
-        text: 'Aceptar',
+        text: 'Accept',
         handler: () => {
           window.location.href = 'https://elpuig.xeill.net/Members/daniel.martinez/noticies/24-25/champions/index_html';
         }
