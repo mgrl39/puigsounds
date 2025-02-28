@@ -26,12 +26,12 @@
       </swiper>
     </ion-card-content>
 
-    <ion-toast
-      :is-open="showOverlay"
-      :message="`${selectedSong} VOTED SUCCESSFULLY`"
-      :duration="1000"
-      position="middle"
-    ></ion-toast>
+    <BasePopupOk
+      type="vote"
+      :is-visible="showPopup"
+      logo-path="../../../assets/images/logos/puig-mini.png"
+      @close="handlePopupClose"
+    />
   </ion-card>
 </template>
 
@@ -41,8 +41,11 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, 
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 
+import BasePopupOk from '../popups/BasePopupOk.vue';
+
 const showOverlay = ref(false);
 const selectedSong = ref('');
+const showPopup = ref(false);
 
 const songs = ref([
   { title: 'Bakamitai', image: '../../../assets/images/songs/song1.png' },
@@ -56,7 +59,11 @@ const songs = ref([
 
 const voteForSong = (song) => {
   selectedSong.value = song.title.toUpperCase();
-  showOverlay.value = true;
+  showPopup.value = true;
+};
+
+const handlePopupClose = () => {
+  showPopup.value = false;
 };
 
 const onSwiper = (swiper) => {
@@ -73,18 +80,19 @@ const onSwiper = (swiper) => {
   --background: #D9D9D9;
   margin: 0;
   padding: 0 15px;
+  border: 5px solid #AF3030;
 }
 
 .carousel-title {
   color: #850000;
   text-align: center;
   font-family: Montserrat;
-  font-size: 20px;
+  font-size: clamp(16px, 5vw, 20px);
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   letter-spacing: -0.3px;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 }
 
 .song-card {
@@ -92,8 +100,12 @@ const onSwiper = (swiper) => {
   cursor: pointer;
   transition: transform 0.3s ease;
   --background: transparent;
-  margin: 0;
+  margin: 0 4px;
+  padding: 8px;
   box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .song-card:hover {
@@ -101,12 +113,12 @@ const onSwiper = (swiper) => {
 }
 
 .song-image {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 15px;
   object-fit: cover;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .song-title {
@@ -118,6 +130,10 @@ const onSwiper = (swiper) => {
   text-align: center;
   line-height: 1.1;
   letter-spacing: -0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 4px;
 }
 
 @media (max-width: 396px) {

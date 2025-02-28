@@ -1,8 +1,8 @@
 <template>
   <BaseLayout>
     <template #main-content>
-      <!-- Añadir UserHeader en la vista móvil -->
-      <UserHeader class="mobile-header" />
+      <!-- Añadir UserHeader para versión móvil -->
+      <UserHeader class="mobile-header" :userName="userName" />
       
       <div class="main-section">
         <div class="left-column">
@@ -27,6 +27,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import BaseLayout from '@/views/components/layout/BaseLayout.vue';
 import SongCarousel from '@/views/components/clickable/SongCarousel.vue';
 import VotingChar from '@/views/components/dashboard/VotingChar.vue';
@@ -34,6 +35,8 @@ import VotingStats from '@/views/components/dashboard/VotingStats.vue';
 import TrendingVotes from '@/views/components/dashboard/TrendingVotes.vue';
 import SongBattle from '@/views/components/dashboard/SongBattle.vue';
 import UserHeader from '../components/layout/UserHeader.vue';
+
+const userName = ref('Daniel Martinez');
 </script>
 
 <style scoped>
@@ -116,6 +119,7 @@ import UserHeader from '../components/layout/UserHeader.vue';
   .left-column,
   .middle-column {
     max-width: 100%;
+    width: 100%;
   }
   
   .middle-content {
@@ -127,7 +131,18 @@ import UserHeader from '../components/layout/UserHeader.vue';
   }
   
   .mobile-header {
-    display: block;
+    display: block !important;
+  }
+
+  .voting-chart {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .song-cards {
+    display: flex;
+    justify-content: center;
   }
 }
 

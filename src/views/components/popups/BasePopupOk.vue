@@ -49,6 +49,7 @@ const messages = {
   reset: `Your password reset link<br><strong>is now ready.</strong><br><strong>Please check your email to proceed</strong>`,
   following: `You started following this user.<br><strong>The followers list is hidden.</strong>`,
   unfollow: `You unfollowed this user.<br><strong>The followers list is hidden.</strong>`,
+  vote: `You voted for this song.<br><strong>The votes list is hidden.</strong>`,
 };
 
 const formattedContent = computed(() => messages[props.type] || '');
