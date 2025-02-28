@@ -77,11 +77,14 @@ export default defineComponent({
   background: #f5f5f5;
   border-radius: 25px;
   position: relative;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .students-card {
-  width: 253px;
-  height: 108px;
+  width: 100%;
+  max-width: 253px;
+  min-height: 108px;
   border-radius: 25px;
   background: #FFF;
   padding: 15px;
@@ -91,7 +94,7 @@ export default defineComponent({
 .students-text {
   color: #888;
   font-family: 'Montserrat', sans-serif;
-  font-size: 25px;
+  font-size: clamp(18px, 5vw, 25px);
   font-weight: 700;
   margin-bottom: 5px;
 }
@@ -99,7 +102,7 @@ export default defineComponent({
 .students-number {
   color: #434040;
   font-family: 'Montserrat', sans-serif;
-  font-size: 70px;
+  font-size: clamp(40px, 10vw, 70px);
   font-weight: 700;
   line-height: 0.8;
 }
@@ -107,28 +110,30 @@ export default defineComponent({
 .next-bell-text {
   color: #1F1F1F;
   font-family: 'Montserrat', sans-serif;
-  font-size: 25px;
+  font-size: clamp(18px, 5vw, 25px);
   font-weight: 700;
   margin: 20px 0;
 }
 
 .countdown-container {
   display: flex;
-  gap: 24px;
+  gap: clamp(10px, 3vw, 24px);
   background: #434040;
-  padding: 24px;
+  padding: clamp(15px, 4vw, 24px);
   border-radius: 15px;
-  width: 365px;
+  width: 100%;
+  max-width: 365px;
 }
 
 .time-block {
   text-align: center;
+  flex: 1;
 }
 
 .time-number {
   color: #FFF;
   font-family: 'Open Sans', sans-serif;
-  font-size: 32px;
+  font-size: clamp(24px, 6vw, 32px);
   font-weight: 400;
   letter-spacing: 0.32px;
   margin-bottom: 5px;
@@ -137,7 +142,7 @@ export default defineComponent({
 .time-label {
   color: #FFF;
   font-family: 'Open Sans', sans-serif;
-  font-size: 11px;
+  font-size: clamp(9px, 2.5vw, 11px);
   font-weight: 400;
 }
 
@@ -146,10 +151,32 @@ export default defineComponent({
   right: -75px;
   top: 50%;
   transform: translateY(-50%);
-  width: 300px;
+  width: 50%;
+  max-width: 300px;
   height: auto;
   opacity: 0.5;
   object-fit: cover;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .side-image {
+    width: 40%;
+    right: -40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .side-image {
+    display: none;
+  }
+  
+  .countdown-container {
+    padding: 12px;
+  }
 }
 
 /* Importar fuentes */

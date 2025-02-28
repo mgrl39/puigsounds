@@ -2,10 +2,10 @@
   <div class="home-page-wrapper">
     <BaseLayout>
       <template #main-content>
-        <UserHeader class="mobile-header" :userName="userName" />
         
         <div class="home-container">
           <div class="left-content">
+            <UserHeader class="mobile-header" :userName="userName" />
             <MusicPlayer class="music-player" />
             <NextBellIn class="next-bell" />
             <ChampionsBanner 
@@ -105,7 +105,7 @@ import UserHeader from '../components/layout/UserHeader.vue';
 }
 
 .next-bell {
-  margin-bottom: auto;
+  margin-bottom: 1rem;
 }
 
 .bottom-banner {
