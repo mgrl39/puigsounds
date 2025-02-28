@@ -22,34 +22,34 @@
         </div>
       </template>
     </BaseLayout>
+
+    <PopupOkNo
+      type="puig"
+      :is-visible="showChampionsPopup"
+      logo-path="/assets/images/logos/champions.png"
+      @cancel="closeChampionsPopup"
+      @confirm="handleConfirm"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { alertController, IonImg } from '@ionic/vue';
+import { IonImg } from '@ionic/vue';
 const showClickText = ref(false);
 const userName = ref('Daniel Martinez');
+const showChampionsPopup = ref(false);
 
-const handleChampionsClick = async () => {
-  const alert = await alertController.create({
-    header: 'Champions',
-    message: 'Do you want to open the Champions link?',
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel'
-      },
-      {
-        text: 'Accept',
-        handler: () => {
-          window.location.href = 'https://elpuig.xeill.net/Members/daniel.martinez/noticies/24-25/champions/index_html';
-        }
-      }
-    ]
-  });
+const handleChampionsClick = () => {
+  showChampionsPopup.value = true;
+};
 
-  await alert.present();
+const closeChampionsPopup = () => {
+  showChampionsPopup.value = false;
+};
+
+const handleConfirm = () => {
+  window.location.href = 'https://elpuig.xeill.net/Members/daniel.martinez/noticies/24-25/champions/index_html';
 };
 
 import BaseLayout from '../components/layout/BaseLayout.vue';
@@ -57,6 +57,7 @@ import ChampionsBanner from '../components/background/ChampionsBanner.vue';
 import NextBellIn from '../components/ui/NextBellIn.vue';
 import MusicPlayer from '../components/ui/MusicPlayer.vue';
 import UserHeader from '../components/layout/UserHeader.vue';
+import PopupOkNo from '../components/popups/PopupOkNo.vue';
 </script>
 
 <style scoped>
