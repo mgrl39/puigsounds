@@ -1,46 +1,60 @@
 <template>
   <ion-page>
     <ion-content>
-      <!-- Versión móvil -->
-      <div class="login-container mobile-only">
-        <img src="../../../assets/images/login-imgs/background/green.png" alt="Background" class="background-img" />
-        <div class="logo-container">
-          <img src="../../../favicon.png" alt="Logo" class="logo"/>
+      <!-- Overlay inicial con animación -->
+      <div v-if="showIntro" class="intro-overlay" @click="startLoginTransition">
+        <div class="animated-logo-container">
+          <img src="../../../favicon.png" alt="Logo" class="animated-logo" :class="{ 'fade-out': isTransitioning }" />
+          <div class="blur-circle"></div>
+          <div class="pulse-circle"></div>
         </div>
-        <PuigSounds />
-        <password-input placeholder="Usuario" type="text" v-model="email"></password-input><br>
-        <password-input placeholder="Contraseña" type="password" v-model="password"></password-input>
-        <Submit>
-          Login
-        </Submit>
-        <ion-text>
-          <p class="forgot-password">¿Olvidaste tu contraseña?</p>
-        </ion-text>
-        <SeparatorLine />
-        <ion-text>
-          <p class="signup-text">¿No tienes una cuenta? <router-link to="/register" class="signup-link">Regístrate</router-link></p>
-        </ion-text> 
+        <div class="click-hint">PuigSounds</div>
       </div>
 
-      <!-- Versión desktop -->
-      <div class="login-container desktop-only" style="background-image: url('../../assets/images/login-imgs/background/green.png'); background-size: cover; background-position: center;">
-        <BackgroundLayer class="background-layer" />
-        <LoginCard />
-        <div class="login-right mobile-only">
-          <password-input placeholder="Usuario" type="text" v-model="email"></password-input>
-          <password-input placeholder="Contraseña" type="password" v-model="password"></password-input><br>
-          <CheckBox>
-            Recordarme
-          </CheckBox>
-          <Submit>
-          {{ email && password ? 'Login' : 'Complete the fields' }}
-        </Submit>
+      <!-- Contenido del login (se muestra después de la animación) -->
+      <div :class="['login-content', { 'fade-in': !showIntro }]">
+        <!-- Versión móvil -->
+        <div class="login-container mobile-only">
+          <img src="../../../assets/images/login-imgs/background/green.png" alt="Background" class="background-img" />
+          <div class="logo-container">
+            <img src="../../../favicon.png" alt="Logo" class="logo"/>
+          </div>
+          <PuigSounds />
+          <password-input placeholder="Usuario" type="text" v-model="email"></password-input><br>
+          <password-input placeholder="Contraseña" type="password" v-model="password"></password-input>
+          <Submit @click="handleLogin">
+            Login
+          </Submit>
           <ion-text>
-            <p class="forgot-password">Forgot your password?</p>
+            <p class="forgot-password">¿Olvidaste tu contraseña?</p>
           </ion-text>
+          <SeparatorLine />
           <ion-text>
-            <p class="signup-text">Don't have an account? <router-link to="/register" class="signup-link">Sign Up</router-link></p>
-          </ion-text>
+            <p class="signup-text">¿No tienes una cuenta? <a @click="handleSignUp" class="signup-link">Regístrate</a></p>
+          </ion-text> 
+        </div>
+
+        <!-- Versión desktop -->
+        <div class="login-container desktop-only" style="background-image: url('../../assets/images/login-imgs/background/green.png'); background-size: cover; background-position: center;">
+          <BackgroundLayer class="background-layer" />
+          <LoginCard />
+          <div class="login-right">
+            <password-input placeholder="Usuario" type="text" v-model="email"></password-input>
+            <password-input placeholder="Contraseña" type="password" v-model="password"></password-input><br>
+            <CheckBox>
+              Recordarme
+            </CheckBox>
+            <Submit @click="handleLogin">
+              {{ email && password ? 'Login' : 'Complete the fields' }}
+            </Submit>
+            <ion-text>
+              <p class="forgot-password">¿Olvidaste tu contraseña?</p>
+            </ion-text>
+            <SeparatorLine />
+            <ion-text>
+              <p class="signup-text">¿No tienes una cuenta? <a @click="handleSignUp" class="signup-link">Regístrate</a></p>
+            </ion-text>
+          </div>
         </div>
       </div>
     </ion-content>
@@ -51,6 +65,7 @@
 import '../../styles/general.css';
 import { ref } from 'vue';
 import { IonPage, IonContent, IonButton, IonText } from '@ionic/vue';
+import { useRouter } from 'vue-router';
 import PasswordInput from '@/views/components/inputs/PasswordInput.vue';
 import Submit from '@/views/components/inputs/Submit.vue';
 import PuigSounds from '@/views/components/ui/PuigSounds.vue';
@@ -58,15 +73,131 @@ import BackgroundLayer from '@/views/components/background/BackgroundLayer.vue';
 import LoginCard from '@/views/components/ui/LoginCard.vue';
 import SeparatorLine from '@/views/components/ui/SeparatorLine.vue';
 import CheckBox from '@/views/components/clickable/CheckboxToggle.vue';
+
+const router = useRouter();
 const email = ref('');
 const password = ref('');
+const showIntro = ref(true);
+const isTransitioning = ref(false);
 
-const login = () => {
-  console.log('Iniciar sesión con', email.value, password.value);
+const startLoginTransition = () => {
+  isTransitioning.value = true;
+  setTimeout(() => {
+    showIntro.value = false;
+  }, 1000);
+};
+
+const handleLogin = async () => {
+  if (!email.value || !password.value) {
+    return;
+  }
+  try {
+    // Aquí iría la lógica de autenticación
+    await router.push('/home');
+  } catch (error) {
+    console.error('Error during login:', error);
+  }
+};
+
+const handleSignUp = () => {
+  router.push('/register');
 };
 </script>
 
 <style scoped>
+/* Estilos para la animación inicial */
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.animated-logo-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animated-logo {
+  width: 150px;
+  height: 150px;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+  transition: opacity 1s ease-out;
+}
+
+.animated-logo.fade-out {
+  opacity: 0;
+}
+
+.blur-circle {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background: rgba(255, 0, 0, 0.2);
+  border-radius: 50%;
+  filter: blur(20px);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.pulse-circle {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px solid rgba(255, 0, 0, 0.3);
+  border-radius: 50%;
+  animation: expand 2s ease-in-out infinite;
+}
+
+.click-hint {
+  margin-top: 2rem;
+  color: #fff;
+  font-size: 1.2rem;
+  opacity: 0.7;
+  animation: fade 2s ease-in-out infinite;
+}
+
+.login-content {
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+.login-content.fade-in {
+  opacity: 1;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.2); opacity: 0.4; }
+}
+
+@keyframes expand {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes fade {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.3; }
+}
+
 ion-content::part(scroll) {
   --padding-start: 0;
   --padding-end: 0;
@@ -126,7 +257,7 @@ ion-content::part(scroll) {
     display: flex;  
     flex-direction: row;
     justify-content: space-between;
-    padding: 0; /* Eliminar el padding para que el efecto rojizo cubra toda la pantalla */
+    padding: 0;
   }
 
   .login-right {
@@ -147,7 +278,7 @@ ion-content::part(scroll) {
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  opacity: 0.8; /* Añadida opacidad a la imagen de fondo */
+  opacity: 0.8;
 }
 
 .logo-container {
@@ -171,13 +302,17 @@ ion-content::part(scroll) {
 .desktop-only {
   background-size: cover;
   background-position: center;
-  opacity: 0.9; /* Añadida opacidad al contenedor desktop */
+  opacity: 0.9;
 }
 
 /* Asegurar que todo el contenido esté por encima del fondo */
 .mobile-only > * {
   position: relative;
   z-index: 1;
+}
+
+.signup-link {
+  cursor: pointer;
 }
 
 </style>

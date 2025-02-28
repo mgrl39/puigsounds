@@ -1,16 +1,16 @@
 <template>
-  <button class="submit-button" @click="handleSubmit">
+  <button class="submit-button" @click="handleClick">
     <slot>Submit</slot>
   </button>
 </template>
 
-<script setup>
-import { useRouter } from 'vue-router';
+<script setup lang="ts">
+const emit = defineEmits<{
+  (e: 'click'): void
+}>();
 
-const router = useRouter();
-
-const handleSubmit = () => {
-  router.push('/home');
+const handleClick = () => {
+  emit('click');
 };
 </script>
 
@@ -31,6 +31,7 @@ const handleSubmit = () => {
   font-size: 18px;
   cursor: pointer;
   transition: all 100ms ease-out;
+  text-decoration: none;
 }
 
 .submit-button:hover {
