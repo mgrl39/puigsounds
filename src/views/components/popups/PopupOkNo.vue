@@ -52,6 +52,7 @@ const emit = defineEmits(['cancel', 'confirm']);
 
 const messages = {
   puig: `Are you sure you want to open<br><strong>the IES El Puig website</strong>?`,
+  logout: `Are you sure you want to<br><strong>log out</strong>?`,
 };
 
 const formattedContent = computed(() => messages[props.type] || '');

@@ -7,9 +7,6 @@
       <div class="main-section">
         <div class="right-section">
             <RankingList :ranked-users="rankedUsers" />
-            <button class="popup-button" @click="showPopup = true">
-              Cambiar Perfil
-            </button>
           </div>
       </div>
         <div class="left-section">

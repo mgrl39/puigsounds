@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- Students Card -->
-    <div class="students-card">
+    <div class="students-card" @click="handleStudentsClick">
       <div class="students-text">STUDENTS</div>
       <div class="students-number">{{ studentsCount }}</div>
     </div>
@@ -30,19 +30,29 @@
       alt="Illustration"
       class="side-image"
     />
+
+    <PopupOkNo
+      type="students"
+      :is-visible="showStudentsPopup"
+      logo-path="/assets/images/logos/puig-love2.png"
+      @cancel="closeStudentsPopup"
+      @confirm="closeStudentsPopup"
+    />
   </div>
 </template>
 
 <script>
 import { IonGrid, IonRow, IonCol } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+import PopupOkNo from '../popups/PopupOkNo.vue';
 
 export default defineComponent({
-  components: { IonGrid, IonRow, IonCol },
+  components: { IonGrid, IonRow, IonCol, PopupOkNo },
   data() {
     return {
       studentsCount: 1014,
-      timeLeft: 7199 // 1 hora 59 min 59 seg en segundos
+      timeLeft: 7199, // 1 hora 59 min 59 seg en segundos
+      showStudentsPopup: false
     }
   },
   computed: {
@@ -54,6 +64,14 @@ export default defineComponent({
     },
     formattedSeconds() {
       return (this.timeLeft % 60).toString().padStart(2, '0');
+    }
+  },
+  methods: {
+    handleStudentsClick() {
+      this.showStudentsPopup = true;
+    },
+    closeStudentsPopup() {
+      this.showStudentsPopup = false;
     }
   },
   mounted() {
@@ -89,6 +107,12 @@ export default defineComponent({
   background: #FFF;
   padding: 15px;
   margin-bottom: 20px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.students-card:hover {
+  transform: scale(1.02);
 }
 
 .students-text {

@@ -2,22 +2,25 @@
   <div class="home-page-wrapper">
     <BaseLayout>
       <template #main-content>
-        
         <div class="home-container">
-          <div class="left-content">
-            <UserHeader class="mobile-header" :userName="userName" />
-            <MusicPlayer class="music-player" />
-            <NextBellIn class="next-bell" />
+          <div class="top-content">
+            <div class="left-content">
+              <UserHeader class="mobile-header" :userName="userName" />
+              <MusicPlayer class="music-player" />
+              <NextBellIn class="next-bell" />
+            </div>
+            <div class="right-content">
+              <IonImg 
+                src="../../../assets/images/logos/puig-love2.png"
+                class="heart-background"
+              ></IonImg>
+            </div>
+          </div>
+          <div class="bottom-content">
             <ChampionsBanner 
-              class="bottom-banner"
+              class="champions-banner"
               @click="handleChampionsClick"
             />
-          </div>
-          <div class="right-content">
-            <IonImg 
-              src="../../../assets/images/logos/puig-love2.png"
-              class="heart-background"
-            ></IonImg>
           </div>
         </div>
       </template>
@@ -63,8 +66,14 @@ import PopupOkNo from '../components/popups/PopupOkNo.vue';
 <style scoped>
 .home-container {
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+}
+
+.top-content {
+  display: flex;
+  flex: 1;
 }
 
 .left-content {
@@ -81,6 +90,15 @@ import PopupOkNo from '../components/popups/PopupOkNo.vue';
   align-items: center;
   position: relative;
   overflow: hidden;
+}
+
+.bottom-content {
+  width: 100%;
+  padding: 1rem;
+}
+
+.champions-banner {
+  width: 100%;
 }
 
 .student-image {
@@ -107,10 +125,6 @@ import PopupOkNo from '../components/popups/PopupOkNo.vue';
 
 .next-bell {
   margin-bottom: 1rem;
-}
-
-.bottom-banner {
-  margin-top: 1rem;
 }
 
 .main-section {
@@ -150,8 +164,9 @@ import PopupOkNo from '../components/popups/PopupOkNo.vue';
     display: block;
   }
   
-  .home-container {
+  .top-content {
     flex-direction: column;
+    flex: initial;
   }
   
   .right-content {
@@ -159,11 +174,21 @@ import PopupOkNo from '../components/popups/PopupOkNo.vue';
   }
   
   .left-content {
-    padding-bottom: 70px; /* Espacio para la navbar */
+    padding: 0.5rem;
+  }
+
+  .music-player,
+  .next-bell {
+    margin-bottom: 0.5rem;
+  }
+
+  .bottom-content {
+    padding: 0.5rem;
   }
 }
 
 .home-page-wrapper {
   display: contents;
+  padding-bottom: 59px; /* Height of mobile navbar */
 }
 </style> 
