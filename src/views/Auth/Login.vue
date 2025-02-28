@@ -38,7 +38,7 @@
         <div class="login-container desktop-only" style="background-image: url('../../assets/images/login-imgs/background/green.png'); background-size: cover; background-position: center;">
           <BackgroundLayer class="background-layer" />
           <LoginCard />
-          <div class="login-right">
+          <div class="login-right mobile-only">
             <password-input placeholder="Usuario" type="text" v-model="email"></password-input>
             <password-input placeholder="Contraseña" type="password" v-model="password"></password-input><br>
             <CheckBox>
@@ -48,11 +48,10 @@
               {{ email && password ? 'Login' : 'Complete the fields' }}
             </Submit>
             <ion-text>
-              <p class="forgot-password">¿Olvidaste tu contraseña?</p>
+              <p class="forgot-password">Forgot your password?</p>
             </ion-text>
-            <SeparatorLine />
             <ion-text>
-              <p class="signup-text">¿No tienes una cuenta? <a @click="handleSignUp" class="signup-link">Regístrate</a></p>
+              <p class="signup-text">Don't have an account? <a @click="handleSignUp" class="signup-link">Sign Up</a></p>
             </ion-text>
           </div>
         </div>
