@@ -72,9 +72,7 @@ const rankedUsers = ref([
   { name: 'jordi', points: 448 },
 ]);
 
-// Songs data for voting page
 const songs = ref([
-  // ... existing code ...
 ]);
 
 const vote = (id) => {
