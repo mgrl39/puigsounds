@@ -67,12 +67,14 @@ if (typeof window !== 'undefined') {
   gap: 20px;
   padding: 20px;
   width: 100%;
+  height: 100vh;
 }
 
 .content-layout {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  height: 100%;
 }
 
 /* Estilos para móvil */

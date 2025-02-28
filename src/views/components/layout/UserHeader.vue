@@ -19,14 +19,38 @@
         <h1 class="user-name">{{ userName }}</h1>
       </div>
       <div class="profile-pic-container">
-        <img :src="profilePicture" alt="Profile picture" class="profile-pic" />
+        <img 
+          :src="profilePicture" 
+          alt="Profile picture" 
+          class="profile-pic"
+          @click="openImagePopup"
+        />
       </div>
     </div>
+
+    <!-- Añadimos el popup de imagen -->
+    <ion-modal 
+      :is-open="showImagePopup" 
+      class="image-popup-modal" 
+      @didDismiss="closeImagePopup"
+    >
+      <div class="image-popup-container">
+        <img 
+          :src="profilePicture" 
+          alt="Profile picture" 
+          class="popup-image"
+        >
+        <ion-button class="close-button" @click="closeImagePopup">
+          Cerrar
+        </ion-button>
+      </div>
+    </ion-modal>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
+import { IonModal, IonButton } from '@ionic/vue';
 
 const props = defineProps({
   userName: {
@@ -42,6 +66,16 @@ const props = defineProps({
     default: ''
   }
 });
+
+const showImagePopup = ref(false);
+
+const openImagePopup = () => {
+  showImagePopup.value = true;
+};
+
+const closeImagePopup = () => {
+  showImagePopup.value = false;
+};
 
 // Determinar el saludo según la hora del día si no se proporciona uno
 const greetingMessage = computed(() => {
@@ -115,11 +149,63 @@ const greetingMessage = computed(() => {
   object-fit: cover;
   background-color: lightgray;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.profile-pic:hover {
+  transform: scale(1.05);
 }
 
 @media (min-width: 768px) {
   .user-header {
     display: none; /* Ocultar en vista desktop */
   }
+}
+
+/* Añadimos los estilos del popup */
+.image-popup-modal {
+  --width: 350px;
+  --height: 450px;
+  --border-radius: 25px;
+}
+
+.image-popup-container {
+  width: 100%;
+  height: 100%;
+  background: #131313;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 25px;
+  border: 3px solid #af3030;
+}
+
+.popup-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 4px solid #FFF;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+
+.popup-image:hover {
+  transform: scale(1.05);
+}
+
+.close-button {
+  --background: #970A2C;
+  --border-radius: 15px;
+  width: 120px;
+  height: 45px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 20px;
+  --box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 </style> 
