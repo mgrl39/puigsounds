@@ -1,13 +1,15 @@
 <template>
-  <div class="achievements-grid" ref="achievementsGrid" :class="{ 'fade-out': shouldHide }">
+  <div class="achievements-grid" ref="achievementsGrid" :class="{ 'fade-out': shouldHideDesktop }">
     <div 
       v-for="(achievement, index) in achievements" 
       :key="index"
       class="achievement-item"
       :class="{ 'achieved': achievement.achieved, [`achievement-${index}`]: true }"
-      @click="showTooltip(index)"
+      @click="handleClick(index)"
       @mouseenter="handleMouseEnter(index)"
       @mouseleave="handleMouseLeave"
+      @touchstart="handleTouchStart(index)"
+      @touchend="handleTouchEnd"
     >
       <img src="../../../../assets/images/archievements/arch.png" alt="Achievement badge" />
       
@@ -31,7 +33,9 @@ export default {
   data() {
     return {
       activeTooltip: null,
-      shouldHide: false,
+      shouldHideDesktop: false,
+      isMobile: false,
+      touchTimer: null,
       achievements: [
         { title: 'Nuevo DJ', description: 'Solicita tu primera canción', achieved: false },
         { title: 'DJ en Entrenamiento', description: 'Solicita 10 canciones', achieved: false },
@@ -47,35 +51,72 @@ export default {
   },
   mounted() {
     this.checkContainerSize();
+    this.checkIfMobile();
     window.addEventListener('resize', this.checkContainerSize);
+    window.addEventListener('resize', this.checkIfMobile);
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.checkContainerSize);
+    window.removeEventListener('resize', this.checkIfMobile);
   },
   methods: {
+    checkIfMobile() {
+      this.isMobile = window.innerWidth <= 768;
+    },
     checkContainerSize() {
       const container = this.$refs.achievementsGrid;
       if (!container) return;
       
       const containerWidth = container.offsetWidth;
-      const minWidthNeeded = 300; // Minimum width needed to display properly
+      const minWidthNeeded = 300;
       
-      this.shouldHide = containerWidth < minWidthNeeded;
+      // Only hide on desktop
+      this.shouldHideDesktop = !this.isMobile && containerWidth < minWidthNeeded;
     },
-    showTooltip(index) {
-      if (this.achievements[index].achieved) {
-        this.activeTooltip = index;
+    handleClick(index) {
+      if (!this.isMobile) {
+        if (this.achievements[index].achieved) {
+          this.activeTooltip = index;
+        }
+      }
+    },
+    handleTouchStart(index) {
+      if (this.isMobile) {
+        this.touchTimer = setTimeout(() => {
+          this.activeTooltip = index;
+        }, 500);
+      }
+    },
+    handleTouchEnd() {
+      if (this.isMobile) {
+        clearTimeout(this.touchTimer);
+        setTimeout(() => {
+          this.activeTooltip = null;
+        }, 2000);
       }
     },
     handleMouseEnter(index) {
-      if (!this.achievements[index].achieved) {
+      if (!this.isMobile && !this.achievements[index].achieved) {
         this.activeTooltip = index;
       }
     },
     handleMouseLeave() {
-      this.activeTooltip = null;
+      if (!this.isMobile) {
+        this.activeTooltip = null;
+      }
     },
     getTooltipPosition(index) {
+      if (this.isMobile) {
+        return {
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%',
+          maxWidth: '300px'
+        }
+      }
+      
       const row = Math.floor(index / 3);
       const totalRows = Math.ceil(this.achievements.length / 3);
       
@@ -207,13 +248,14 @@ export default {
   
   .achievement-tooltip {
     position: fixed;
-    right: 50%;
+    left: 50%;
     top: 50%;
-    transform: translate(50%, -50%);
+    transform: translate(-50%, -50%);
     width: 80%;
     max-width: 300px;
     height: auto;
     font-size: 0.9rem;
+    z-index: 1000;
   }
 }
 </style>

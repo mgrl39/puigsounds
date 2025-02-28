@@ -13,8 +13,10 @@
                 <div class="profile-header">
                   <ion-img class="profile-pic" :src="previewImage || 'assets/images/profile-pic/principal-profile-pic.png'" alt="Profile" />
                   <div class="stats-container">
-                    <RankBox rank-type="GLOBAL" />
-                    <RankBox rank-type="DAW" />
+                    <div class="rank-boxes">
+                      <RankBox rank-type="GLOBAL" />
+                      <RankBox rank-type="DAW" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -169,12 +171,14 @@ const confirmLogout = () => {
   flex-direction: column;
   gap: 30px;
   justify-content: center;
+  align-items: center;
 }
 
 .profile-info {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center;
 }
 
 .profile-header {
@@ -196,6 +200,14 @@ const confirmLogout = () => {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
+}
+
+.rank-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
 
 .right-side {

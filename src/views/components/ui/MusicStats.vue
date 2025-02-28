@@ -66,12 +66,13 @@ const getRandomColor = () => {
 
 const calculateVisibleBars = () => {
   const container = document.querySelector('.genres-container');
-  if (!container) return 5;
+  if (!container) return 3; // Default to 3 bars minimum
   
   const containerWidth = container.offsetWidth;
-  const minBarSpace = 80; // Minimum space needed for each bar including margins
+  const minBarSpace = 60; // Reduced space needed for each bar
   
-  return Math.min(5, Math.floor(containerWidth / minBarSpace));
+  const calculatedBars = Math.floor(containerWidth / minBarSpace);
+  return Math.max(3, Math.min(5, calculatedBars)); // Ensure minimum 3 bars, maximum 5
 };
 
 const getRandomGenres = (count) => {
@@ -114,7 +115,7 @@ onMounted(() => {
   width: 100%;
   max-width: 389.812px;
   min-width: 200px;
-  height: 340px; /* Increased from 315.924px */
+  height: 340px;
   border-radius: 25px;
   background: #5b1c2c;
   padding: 20px;
@@ -137,23 +138,23 @@ onMounted(() => {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 20px; /* Reduced from 30px */
+  margin-bottom: 20px;
 }
 
 .bars-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 20px;
   width: 100%;
   height: 200px;
-  flex-wrap: wrap;
-  margin-bottom: 10px; /* Added margin to give more space for labels */
+  flex-wrap: nowrap;
+  margin-bottom: 10px;
 }
 
 .bar-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 10px;
 }
 
 .genre-bar {
@@ -182,11 +183,17 @@ onMounted(() => {
 
 @media (max-width: 400px) {
   .genres-container {
-    padding: 10px;
+    padding: 15px;
+    height: 320px;
+  }
+  
+  .bars-container {
+    gap: 15px;
+    justify-content: space-evenly;
   }
   
   .bar-wrapper {
-    margin: 0 5px;
+    flex: 0 1 auto;
   }
 }
 </style>
