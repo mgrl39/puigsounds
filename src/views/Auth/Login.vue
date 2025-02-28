@@ -15,16 +15,16 @@
       <div :class="['login-content', { 'fade-in': !showIntro }]">
         <!-- Versión móvil -->
         <div class="login-container mobile-only">
-          <img src="../../../assets/images/login-imgs/background/green.png" alt="Background" class="background-img" />
+          <img src="../../../assets/images/login-imgs/background/green.png" alt="Background" class="background-img" style="transform: translateY(-50px);" />
           <div class="logo-container">
             <img src="../../../favicon.png" alt="Logo" class="logo"/>
           </div>
           <PuigSounds />
           <password-input placeholder="Usuario" type="text" v-model="email"></password-input><br>
           <password-input placeholder="Contraseña" type="password" v-model="password"></password-input>
-          <Submit @click="handleLogin">
-            Login
-          </Submit>
+          <a href="/home" class="submit-button mobile-button">
+           Login
+          </a>
           <ion-text>
             <p class="forgot-password">¿Olvidaste tu contraseña?</p>
           </ion-text>
@@ -37,25 +37,19 @@
         <!-- Versión desktop -->
         <div class="login-container desktop-only" style="background-image: url('../../assets/images/login-imgs/background/green.png'); background-size: cover; background-position: center;">
           <BackgroundLayer class="background-layer" />
-          <LoginCard />
-          <div class="login-right mobile-only">
-            <password-input placeholder="Usuario" type="text" v-model="email"></password-input>
-            <password-input placeholder="Contraseña" type="password" v-model="password"></password-input><br>
-            <CheckBox>
-              Recordarme
-            </CheckBox>
-            <Submit @click="handleLogin">
-              {{ email && password ? 'Login' : 'Complete the fields' }}
-            </Submit>
-            <ion-text>
-              <p class="forgot-password">Forgot your password?</p>
-            </ion-text>
-            <ion-text>
-              <p class="signup-text">Don't have an account? <a @click="handleSignUp" class="signup-link">Sign Up</a></p>
-            </ion-text>
-          </div>
+          <LoginCard @login="handleDesktopLogin" />
         </div>
       </div>
+
+      <!-- Popup de enlace secreto -->
+      <PopupOkNo
+        :is-visible="showSecretLinkPopup"
+        type="secret-link"
+        logo-path="/assets/images/logos/puig-mini.png"
+        @cancel="showSecretLinkPopup = false"
+        @confirm="handleSecretLink"
+      />
+
     </ion-content>
   </ion-page>
 </template>
@@ -66,18 +60,19 @@ import { ref } from 'vue';
 import { IonPage, IonContent, IonButton, IonText } from '@ionic/vue';
 import { useRouter } from 'vue-router';
 import PasswordInput from '@/views/components/inputs/PasswordInput.vue';
-import Submit from '@/views/components/inputs/Submit.vue';
 import PuigSounds from '@/views/components/ui/PuigSounds.vue';
 import BackgroundLayer from '@/views/components/background/BackgroundLayer.vue';
 import LoginCard from '@/views/components/ui/LoginCard.vue';
 import SeparatorLine from '@/views/components/ui/SeparatorLine.vue';
 import CheckBox from '@/views/components/clickable/CheckboxToggle.vue';
+import PopupOkNo from '@/views/components/popups/PopupOkNo.vue';
 
 const router = useRouter();
 const email = ref('');
 const password = ref('');
 const showIntro = ref(true);
 const isTransitioning = ref(false);
+const showSecretLinkPopup = ref(false);
 
 const startLoginTransition = () => {
   isTransitioning.value = true;
@@ -90,12 +85,17 @@ const handleLogin = async () => {
   if (!email.value || !password.value) {
     return;
   }
-  try {
-    // Aquí iría la lógica de autenticación
-    await router.push('/home');
-  } catch (error) {
-    console.error('Error during login:', error);
-  }
+  showSecretLinkPopup.value = true;
+};
+
+const handleDesktopLogin = () => {
+  alert('Redirigiendo a /home');
+  router.push('/home');
+};
+
+const handleSecretLink = () => {
+  window.location.href = 'http://localhost:8100/home';
+  showSecretLinkPopup.value = false;
 };
 
 const handleSignUp = () => {
@@ -230,9 +230,17 @@ ion-content::part(scroll) {
   position: relative;
 }
 
+.mobile-button {
+  display: none;
+}
+
 /* Estilos para desktop */
 .desktop-only {
   position: relative;
+  display: none;
+}
+
+.desktop-button {
   display: none;
 }
 
@@ -242,7 +250,19 @@ ion-content::part(scroll) {
     display: flex;
   }
   
+  .mobile-button {
+    display: flex;
+  }
+  
   .desktop-only {
+    display: none !important;
+  }
+  
+  .desktop-button {
+    display: none !important;
+  }
+  
+  .desktop-input {
     display: none !important;
   }
 }
@@ -252,20 +272,19 @@ ion-content::part(scroll) {
     display: none !important;
   }
   
+  .mobile-button {
+    display: none !important;
+  }
+  
   .desktop-only {
     display: flex;  
     flex-direction: row;
     justify-content: space-between;
     padding: 0;
   }
-
-  .login-right {
-    flex: 1;
-    max-width: 400px;
+  
+  .desktop-button {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
   }
 }
 
@@ -312,6 +331,33 @@ ion-content::part(scroll) {
 
 .signup-link {
   cursor: pointer;
+}
+
+.submit-button {
+  display: flex;
+  width: 368px;
+  height: 54px;
+  padding: 16px 0px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 25px;
+  border: 2px solid #970A2C;
+  background: #970A2C;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 100ms ease-out;
+  text-decoration: none;
+}
+
+.submit-button:hover {
+  opacity: 0.9;
+}
+
+.submit-button:active {
+  transform: scale(0.98);
 }
 
 </style>

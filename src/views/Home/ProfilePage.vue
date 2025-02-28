@@ -314,7 +314,7 @@ label {
 
   .profile-container {
     grid-template-columns: 1fr;
-    padding-bottom: 70px;
+    padding-bottom: 20px;
   }
 
   .profile-header {
@@ -332,6 +332,10 @@ label {
 
   .music-stats {
     width: 100%;
+  }
+
+  .action-buttons {
+    margin-bottom: 70px;
   }
 }
 </style>

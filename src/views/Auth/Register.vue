@@ -1,48 +1,23 @@
 <template>
   <ion-page>
     <ion-content class="ion-padding">
-      <img src="../../../assets/images/login-imgs/background/green.png" alt="Background" class="background-img mobile-only mobile-background"/>
-
-      <!-- Versión móvil -->
-      <div class="login-container mobile-only">
-        <div class="logo-container">
-          <img src="../../../favicon.png" alt="Logo" class="logo"/>
-        </div>
-        <PuigSounds />
-        <password-input placeholder="Username" type="text" v-model="email"></password-input><br>
-        <password-input placeholder="Password" type="password" v-model="password"></password-input>
-        <Submit>
-          Login
-        </Submit>
-        <ion-text>
-          <p class="forgot-password">test?</p>
-        </ion-text>
-        <SeparatorLine />
-        <ion-text>
-          <p class="signup-text">¿No tienes una cuenta? <router-link to="/signup" class="signup-link">Regístrate</router-link></p>
-        </ion-text>
-      </div>
-
-      <!-- Versión desktop -->
-      <div class="login-container desktop-only" style="background-image: url('../../../assets/images/login-imgs/background/green.png'); background-size: cover; background-position: center;">
-        <div class="login-right">
-          <div class="logo-container">
-            <img src="../../assets/favicon.png" alt="Logo" class="logo"/>
+      <div class="home-page-wrapper">
+        <div class="login-container" style="background-image: url('../../../assets/images/login-imgs/background/green.png'); background-size: cover; background-position: center;">
+          <div class="login-right">
+            <div class="logo-container">
+              <img src="../../assets/favicon.png" alt="Logo" class="logo"/>
+            </div>
+            <password-input placeholder="Usuario" type="text" v-model="username"></password-input>
+            <password-input placeholder="Email" type="email" v-model="email"></password-input>
+            <password-input placeholder="Contraseña" type="password" v-model="password"></password-input>
+            <password-input placeholder="Confirmar Contraseña" type="password" v-model="confirmPassword"></password-input>
+            <Submit @click="register">
+              Registrarse
+            </Submit>
+            <ion-text>
+              <p class="signup-text">¿Ya tienes una cuenta? <router-link to="/login" class="signup-link">Inicia sesión</router-link></p>
+            </ion-text>
           </div>
-          <password-input placeholder="Usuario" type="text" v-model="email"></password-input>
-          <password-input placeholder="Contraseña" type="password" v-model="password"></password-input><br>
-          <checkBox>
-            Recordarme
-          </checkBox>
-          <Submit>
-          Login
-        </Submit>
-          <ion-text>
-            <p class="forgot-password">¿Olvidaste tu contraseña?</p>
-          </ion-text>
-          <ion-text>
-            <p class="signup-text">¿No tienes una cuenta? <router-link to="/signup" class="signup-link">Regístrate</router-link></p>
-          </ion-text>
         </div>
       </div>
     </ion-content>
@@ -52,17 +27,21 @@
 <script setup>
 import '../../styles/general.css';
 import { ref } from 'vue';
-import { IonPage, IonContent, IonButton, IonText } from '@ionic/vue';
+import { IonPage, IonContent, IonText } from '@ionic/vue';
 import PasswordInput from '@/views/components/inputs/PasswordInput.vue';
 import Submit from '@/views/components/inputs/Submit.vue';
-import PuigSounds from '@/views/components/ui/PuigSounds.vue';
-import SeparatorLine from '@/views/components/ui/SeparatorLine.vue';
-import CheckBox from '@/views/components/clickable/CheckboxToggle.vue';
+
+const username = ref('');
 const email = ref('');
 const password = ref('');
+const confirmPassword = ref('');
 
-const login = () => {
-  console.log('Iniciar sesión con', email.value, password.value);
+const register = () => {
+  console.log('Registrando usuario:', {
+    username: username.value,
+    email: email.value,
+    password: password.value
+  });
 };
 </script>
 
@@ -71,14 +50,20 @@ const login = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
-.background-img {
+.login-right {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  max-width: 400px;
 }
 
 .logo-container {
@@ -90,15 +75,17 @@ const login = () => {
   height: auto;
 }
 
-.login-button {
-  width: 368px;
-  height: 54px;
-  margin: 20px 0;
+.signup-text {
+  color: #FFF;
+  margin-top: 1rem;
 }
 
-/* Estilo adicional para la versión desktop */
-.desktop-only {
-  background-size: cover;
-  background-position: center;
+.signup-link {
+  color: #970A2C;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
 }
 </style>

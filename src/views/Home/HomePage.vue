@@ -5,7 +5,10 @@
         <div class="home-container">
           <div class="top-content">
             <div class="left-content">
-              <UserHeader class="mobile-header" :userName="userName" />
+              <UserHeader class="mobile-header desktop-hidden" :userName="userName" />
+              <div class="mobile-only">
+                <h2 class="section-title">Today's Song</h2>
+              </div>
               <MusicPlayer class="music-player" />
               <NextBellIn class="next-bell" />
             </div>
@@ -17,6 +20,9 @@
             </div>
           </div>
           <div class="bottom-content">
+            <div class="mobile-only">
+              <h2 class="section-title">Puig News</h2>
+            </div>
             <ChampionsBanner 
               class="champions-banner"
               @click="handleChampionsClick"
@@ -159,11 +165,29 @@ import PopupOkNo from '../components/popups/PopupOkNo.vue';
   display: none;
 }
 
+.desktop-hidden {
+  display: none;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.section-title {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
 @media (max-width: 768px) {
-  .mobile-header {
+  .desktop-hidden {
     display: block;
   }
   
+  .mobile-only {
+    display: block;
+  }
+
   .top-content {
     flex-direction: column;
     flex: initial;

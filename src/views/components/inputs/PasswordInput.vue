@@ -53,6 +53,10 @@ const computedIcon = eyeIcon;
   background-color: #CFCFD8 !important;
 }
 
+.custom-input::part(native) {
+  background: #CFCFD8 !important;
+}
+
 .input-icon {
   width: 22px;
   height: 22px;

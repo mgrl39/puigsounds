@@ -4,6 +4,10 @@
       <template #main-content>
         <UserHeader class="mobile-header" :userName="userName" />
         
+        <div class="mobile-only">
+          <h2 class="vote-message">Don't be a loser...</h2>
+        </div>
+
         <div class="main-section">
           <div class="left-column">
             <div class="song-cards">
@@ -129,6 +133,17 @@ const confirmVote = () => {
   text-align: center;
 }
 
+.vote-message {
+  color: white;
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 1.2rem;
+}
+
+.mobile-only {
+  display: none;
+}
+
 @media (max-width: 1417px) {
   .trending-votes {
     display: none;
@@ -142,6 +157,10 @@ const confirmVote = () => {
 }
 
 @media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+
   .main-section {
     flex-direction: column;
     padding-bottom: 70px;
