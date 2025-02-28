@@ -1,42 +1,73 @@
 <template>
-  <BaseLayout>
-    <template #main-content>
-      <!-- Añadir UserHeader para versión móvil -->
-      <UserHeader class="mobile-header" :userName="userName" />
-      
-      <div class="main-section">
-        <div class="left-column">
-          <div class="song-cards">
-            <SongCarousel />
-          </div>
-          <div class="voting-chart">
-            <VotingChar />
-          </div>
-        </div>
-        <div class="middle-column">
-          <div class="middle-content">
-            <div class="voting-stats">
-              <VotingStats />
+  <div>
+    <BaseLayout>
+      <template #main-content>
+        <UserHeader class="mobile-header" :userName="userName" />
+        
+        <div class="main-section">
+          <div class="left-column">
+            <div class="song-cards">
+              <SongCarousel />
+            </div>
+            <div class="voting-chart">
+              <VotingChar />
             </div>
           </div>
+          <div class="middle-column">
+            <div class="middle-content">
+              <div class="voting-stats">
+                <VotingStats />
+              </div>
+            </div>
+          </div>
+          <TrendingVotes class="trending-votes" />
         </div>
-        <TrendingVotes class="trending-votes" />
-      </div>
-    </template>
-  </BaseLayout>
+      </template>
+    </BaseLayout>
+
+    <PopupOkNo
+      :is-visible="showConfirmationPopup" 
+      type="confirmation"
+      :logo-path="'/assets/images/logos/puig-mini.png'"
+      @cancel="showConfirmationPopup = false"
+      @confirm="confirmVote"
+    />
+
+    <PopupOkNo
+      :is-visible="showLogoutPopup"
+      type="logout"
+      :logo-path="'/assets/images/logos/puig-mini.png'"
+      @cancel="showLogoutPopup = false"
+      @confirm="confirmLogout"
+    />
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import BaseLayout from '@/views/components/layout/BaseLayout.vue';
 import SongCarousel from '@/views/components/clickable/SongCarousel.vue';
 import VotingChar from '@/views/components/dashboard/VotingChar.vue';
 import VotingStats from '@/views/components/dashboard/VotingStats.vue';
 import TrendingVotes from '@/views/components/dashboard/TrendingVotes.vue';
-import SongBattle from '@/views/components/dashboard/SongBattle.vue';
 import UserHeader from '../components/layout/UserHeader.vue';
+import PopupOkNo from '@/views/components/popups/PopupOkNo.vue';
 
+const router = useRouter();
 const userName = ref('Daniel Martinez');
+const showLogoutPopup = ref(false);
+const showConfirmationPopup = ref(false);
+
+const confirmLogout = () => {
+  showLogoutPopup.value = false;
+  router.push('/login');
+};
+
+const confirmVote = () => {
+  showConfirmationPopup.value = false;
+  // Add vote confirmation logic here
+};
 </script>
 
 <style scoped>
@@ -113,7 +144,7 @@ const userName = ref('Daniel Martinez');
 @media (max-width: 768px) {
   .main-section {
     flex-direction: column;
-    padding-bottom: 70px; /* Espacio para la navbar */
+    padding-bottom: 70px;
   }
   
   .left-column,

@@ -1,9 +1,9 @@
 <template>
-  <div class="profile-page">
+  <div>
     <BaseLayout>
       <template #main-content>
         <!-- Mobile header -->
-        <UserHeader class="mobile-header" />
+        <UserHeader class="mobile-header" :userName="userName" />
         
         <div class="main-section">
           <div class="profile-container">
@@ -31,7 +31,7 @@
 
           <div class="action-buttons">
             <CustomButton text="Edit" @click="showEditPopup = true" />
-            <CustomButton text="Logout" />
+            <CustomButton text="Logout" @click="showLogoutPopup = true" />
           </div>
         </div>
       </template>
@@ -71,11 +71,21 @@
       logo-path="/assets/images/logos/profile.png"
       @close="closePreviewPopup"
     />
+
+    <!-- Logout Popup -->
+    <PopupOkNo
+      :is-visible="showLogoutPopup"
+      type="logout"
+      logo-path="/assets/images/logos/puig-mini.png"
+      @cancel="showLogoutPopup = false"
+      @confirm="confirmLogout"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { IonImg, IonModal, IonButton } from '@ionic/vue';
 import BaseLayout from '@/views/components/layout/BaseLayout.vue';
 import RankBox from '@/views/components/rankings/RankBox.vue';
@@ -84,9 +94,13 @@ import MusicStats from '@/views/components/ui/MusicStats.vue';
 import UserHeader from '@/views/components/layout/UserHeader.vue';
 import Achievements from '@/views/components/ui/Archievements.vue';
 import BasePopupOk from '@/views/components/popups/BasePopupOk.vue';
+import PopupOkNo from '@/views/components/popups/PopupOkNo.vue';
 
+const router = useRouter();
+const userName = ref('Daniel Martinez');
 const showEditPopup = ref(false);
 const showPreviewPopup = ref(false);
+const showLogoutPopup = ref(false);
 const username = ref('');
 const email = ref('');
 const password = ref('');
@@ -114,8 +128,6 @@ const submitForm = () => {
   });
   showEditPopup.value = false;
   showPreviewPopup.value = true;
-  
-
 };
 
 const cancelEdit = () => {
@@ -125,6 +137,11 @@ const cancelEdit = () => {
 
 const closePreviewPopup = () => {
   showPreviewPopup.value = false;
+};
+
+const confirmLogout = () => {
+  showLogoutPopup.value = false;
+  router.push('/login');
 };
 </script>
 
@@ -170,7 +187,7 @@ const closePreviewPopup = () => {
   width: 216px;
   height: 226px;
   border-radius: 10px;
-  object-fit: cover; /* Hace que la imagen cubra todo el espacio */
+  object-fit: cover;
   background-color: lightgray;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
