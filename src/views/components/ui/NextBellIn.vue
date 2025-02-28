@@ -34,7 +34,8 @@
     <PopupOkNo
       type="students"
       :is-visible="showStudentsPopup"
-      logo-path="/assets/images/logos/puig-love2.png"
+      title="Welcome to El Puig!"
+      message="We are a vibrant community of students and teachers working together to create an amazing learning environment. Join us in making education fun and engaging!"
       @cancel="closeStudentsPopup"
       @confirm="closeStudentsPopup"
     />

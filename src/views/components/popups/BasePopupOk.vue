@@ -50,6 +50,7 @@ const messages = {
   following: `You started following this user.<br><strong>The followers list is hidden.</strong>`,
   unfollow: `You unfollowed this user.<br><strong>The followers list is hidden.</strong>`,
   vote: `You voted for this song.<br><strong>The votes list is hidden.</strong>`,
+  preview: `Your profile has been updated temporarily.<br><strong>Admins will review your changes.</strong>`
 };
 
 const formattedContent = computed(() => messages[props.type] || '');

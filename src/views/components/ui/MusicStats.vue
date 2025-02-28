@@ -29,19 +29,19 @@
             :y="calculatedYPositions[index]" 
             rx="10.4665" 
             :width="barWidth" 
-            :height="barHeights[index]" 
+            :height="barHeights[index]"
+            :style="{ fill: barColors[index] }"
           />
         </svg>
         <span class="genre-label">{{ genre }}</span>
       </div>
     </div>
   </div>
- <!-- <MusicPlayer @click="handleMusicPlay" /> -->
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import MusicPlayer from './MusicPlayer.vue';
+
 const allGenres = [
   'Pop', 'Rock', 'Metal', 'Jazz', 'Clásica', 
   'Drill', 'Trap', 'Reggaeton', 'House', 'Techno',
@@ -53,15 +53,36 @@ const barWidth = ref(20.933);
 const barHeight = ref(183.857);
 const barHeights = ref([]);
 const calculatedYPositions = ref([]);
-const isPlaying = ref(false);
+const barColors = ref([]);
 
-const getRandomGenres = () => {
+const getRandomColor = () => {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+const calculateVisibleBars = () => {
+  const container = document.querySelector('.genres-container');
+  if (!container) return 5;
+  
+  const containerWidth = container.offsetWidth;
+  const minBarSpace = 80; // Minimum space needed for each bar including margins
+  
+  return Math.min(5, Math.floor(containerWidth / minBarSpace));
+};
+
+const getRandomGenres = (count) => {
   const shuffled = [...allGenres].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, 5);
+  return shuffled.slice(0, count);
 };
 
 const generateRandomHeights = () => {
-  displayedGenres.value = getRandomGenres();
+  const visibleBars = calculateVisibleBars();
+  displayedGenres.value = getRandomGenres(visibleBars);
+  
   barHeights.value = displayedGenres.value.map(() => {
     const minHeight = 30;
     const maxHeight = barHeight.value - 10;
@@ -71,17 +92,17 @@ const generateRandomHeights = () => {
   calculatedYPositions.value = barHeights.value.map(height => 
     barHeight.value - height
   );
-};
-
-const handleMusicPlay = () => {
-  isPlaying.value = !isPlaying.value;
-  // Aquí puedes agregar la lógica adicional para reproducir música
-  console.log('Estado de reproducción:', isPlaying.value);
+  
+  barColors.value = displayedGenres.value.map(() => getRandomColor());
 };
 
 onMounted(() => {
   generateRandomHeights();
-  // Actualizar los géneros cada 100 segundos
+  
+  window.addEventListener('resize', () => {
+    generateRandomHeights();
+  });
+  
   setInterval(() => {
     generateRandomHeights();
   }, 100000);
@@ -90,14 +111,17 @@ onMounted(() => {
 
 <style scoped>
 .genres-container {
-  width: 389.812px;
-  height: 315.924px;
+  width: 100%;
+  max-width: 389.812px;
+  min-width: 200px;
+  height: 340px; /* Increased from 315.924px */
   border-radius: 25px;
   background: #5b1c2c;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .title {
@@ -113,20 +137,23 @@ onMounted(() => {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 30px;
+  margin-bottom: 20px; /* Reduced from 30px */
 }
 
 .bars-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
   height: 200px;
+  flex-wrap: wrap;
+  margin-bottom: 10px; /* Added margin to give more space for labels */
 }
 
 .bar-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 10px;
 }
 
 .genre-bar {
@@ -138,7 +165,6 @@ onMounted(() => {
 }
 
 .animated-bar {
-  fill: #7a2c2e;
   fill-opacity: 0.8;
   transition: all 1.5s ease-in-out;
   transform-origin: bottom;
@@ -154,14 +180,13 @@ onMounted(() => {
   width: 37.652px;
 }
 
-@keyframes barGrowth {
-  from {
-    height: 0;
-    y: 185;
+@media (max-width: 400px) {
+  .genres-container {
+    padding: 10px;
   }
-  to {
-    height: v-bind('barHeight');
-    y: v-bind('calculatedYPosition');
+  
+  .bar-wrapper {
+    margin: 0 5px;
   }
 }
-</style>  
+</style>
