@@ -4,7 +4,7 @@
       <!-- Imagen del álbum -->
       <div 
         class="album-art"
-        :style="{ backgroundImage: `url(assets/images/songs/most-voted.png)` }"
+        :style="{ backgroundImage: `url(${coverImage})` }"
       ></div>
 
       <!-- Información de la canción -->
@@ -30,6 +30,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { Howl } from 'howler'; // Importar la librería Howler para la reproducción de audio
 
 const props = defineProps({
   title: {
@@ -43,15 +44,36 @@ const props = defineProps({
   coverImage: {
     type: String,
     default: '/path-to-default-image.jpg'
+  },
+  audioFile: {
+    type: String,
+    default: 'assets/audio/most-voted.mp3' // Ruta al archivo de audio
   }
 });
 
 const isPlaying = ref(false);
+let sound = null;
+
+// Inicializar el objeto Howl para la reproducción de audio
+const initAudio = () => {
+  sound = new Howl({
+    src: [props.audioFile],
+    html5: true
+  });
+};
 
 const togglePlay = () => {
+  if (!sound) {
+    initAudio();
+  }
+  if (isPlaying.value) {
+    sound.pause();
+  } else {
+    sound.play();
+  }
   isPlaying.value = !isPlaying.value;
-  // Aquí iría la lógica de control de reproducción
 };
+
 </script>
 
 <style scoped>
