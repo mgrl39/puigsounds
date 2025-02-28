@@ -136,4 +136,4 @@ const togglePlay = () => {
 .play-button:hover .play-icon {
   transform: translate(-50%, -50%) scale(1.1);
 }
-</style>
+</style>  

@@ -37,19 +37,22 @@ const currentRoute = computed(() => route.path);
 
 <style scoped>
 .mobile-navbar {
-  width: 396px;
+  width: 100%;
+  max-width: 396px;
   height: 59px;
   flex-shrink: 0;
-  border-radius: 15px 15px 0 0; /* Ajustado para que solo sea redondeado arriba */
-  background: #970A2C;
+  border-radius: 15px 15px 0 0;
+  background-color: #970A2C !important;
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: fixed;
-  bottom: 0; /* Cambiado de 20px a 0 */
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
 
 .nav-item {
@@ -58,6 +61,8 @@ const currentRoute = computed(() => route.path);
   align-items: center;
   padding: 8px;
   cursor: pointer;
+  width: 100%;
+  max-width: 60px;
 }
 
 .nav-item svg {
@@ -70,6 +75,19 @@ const currentRoute = computed(() => route.path);
 
 .nav-item.active svg {
   fill: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .mobile-navbar {
+    max-width: 100%;
+    border-radius: 15px 15px 0 0;
+  }
+  
+  .nav-item svg {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 @media (min-width: 768px) {
